@@ -8,43 +8,81 @@
 #
 
 library(shiny)
+library(shinythemes)
 
-# Define UI for application that draws a histogram
-ui <- fluidPage(
-   
-   # Application title
-   titlePanel("Old Faithful Geyser Data"),
-   
-   # Sidebar with a slider input for number of bins 
-   sidebarLayout(
-      sidebarPanel(
-         sliderInput("bins",
-                     "Number of bins:",
-                     min = 1,
-                     max = 50,
-                     value = 30)
-      ),
-      
-      # Show a plot of the generated distribution
-      mainPanel(
-         plotOutput("distPlot")
+shinyApp(
+  ui = tagList(
+    fluidPage(theme = shinytheme("cosmo")),
+    navbarPage(
+      "And the Academy Award goes to...",
+      tabPanel("Introduction",
+               sidebarPanel(
+                 fileInput("File", "File input:"),
+                 textInput("txt", "Text input:", "general"),
+                 sliderInput("slider", "Slider input:", 1, 100, 30),
+                 tags$h5("Deafult actionButton:"),
+                 actionButton("action", "Search"),
+                 
+                 tags$h5("actionButton with CSS class:"),
+                 actionButton("action2", "Action button", class = "btn-primary")
+               ),
+               mainPanel(
+                 tabsetPanel(
+                   tabPanel("Prediction and Inference",
+                            h4("Table"),
+                            tableOutput("table"),
+                            h4("Verbatim text output"),
+                            verbatimTextOutput("txtout"),
+                            h1("Header 1"),
+                            h2("Header 2"),
+                            h3("Header 3"),
+                            h4("Header 4"),
+                            h5("Header 5")
+                   ),
+                   tabPanel("Working with Data", "This panel is intentionally left blank"),
+                   tabPanel("Linear Regression", "This panel is intentionally left blank"),
+                   tabPanel("Logistic Regression", "This panel is intentionally left blank")
+                 )
+               )),
+      tabPanel("Best Actor",
+               sidebarPanel(
+                 fileInput("file", "File input:"),
+                 textInput("txt", "Text input:", "general"),
+                 sliderInput("slider", "Slider input:", 1, 100, 30),
+                 tags$h5("Deafult actionButton:"),
+                 actionButton("action", "Search"),
+                 
+                 tags$h5("actionButton with CSS class:"),
+                 actionButton("action2", "Action button", class = "btn-primary")
+               ),
+               mainPanel(
+                 tabsetPanel(
+                   tabPanel("Prediction and Inference",
+                            h4("Table"),
+                            tableOutput("table"),
+                            h4("Verbatim text output"),
+                            verbatimTextOutput("txtout"),
+                            h1("Header 1"),
+                            h2("Header 2"),
+                            h3("Header 3"),
+                            h4("Header 4"),
+                            h5("Header 5")
+                   ),
+                   tabPanel("Working with Data", "This panel is intentionally left blank"),
+                   tabPanel("Linear Regression", "This panel is intentionally left blank"),
+                   tabPanel("Logistic Regression", "This panel is intentionally left blank")
+                 )
+               )),
+      tabPanel("Best Actress", "This panel is intentionally left blank"),
+      tabPanel("Best Film", "This panel is intentionally left blank")
       )
-   )
-)
-
-# Define server logic required to draw a histogram
-server <- function(input, output) {
-   
-   output$distPlot <- renderPlot({
-      # generate bins based on input$bins from ui.R
-      x    <- faithful[, 2] 
-      bins <- seq(min(x), max(x), length.out = input$bins + 1)
-      
-      # draw the histogram with the specified number of bins
-      hist(x, breaks = bins, col = 'darkgray', border = 'white')
-   })
-}
-
-# Run the application 
-shinyApp(ui = ui, server = server)
+  ),
+  server = function(input, output) {
+    output$txtout <- renderText({
+      paste(input$txt, input$slider, format(input$date), sep = ", ")
+    })
+    output$table <- renderTable({
+      head(cars, 4)
+    })
+  })
 
