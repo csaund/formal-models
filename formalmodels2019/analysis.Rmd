@@ -1,0 +1,132 @@
+---
+title: "Formal Models Analysis"
+author: "CSaund"
+date: "2/21/2019"
+output: html_document
+---
+
+
+get dat data
+```{r}
+movie_data <- read.csv('prepared.csv')
+noms <- read.csv("nominations.csv")
+films <-read.csv("films.csv")
+BestPicNoms <- noms %>% filter(category == "Picture", award == "Oscar")
+bestnom2 <- left_join(BestPicNoms, films, by = "film")
+```
+
+
+Exploratory analyses
+```{r}
+oscar_by_imdb <- lm(Oscar ~ imdb_score * running_time, data=movie_data)
+summary(oscar_by_imdb)
+```
+
+## What is Logistic Regression?
+
+
+## Prediction and Inference
+- Coding question: 
+Do you think a movie that was X long released in X month and had X imdb score would win?
+
+
+## Overfitting
+
+LOOCV
+//
+build on 90%
+test  on 10%
+```{r}
+oscar_by_lots <- lm(Oscar ~ imdb_score * running_time * rt_critic_score, data=movie_data_90)
+summary(oscar_by_lots)
+```
+
+```{r}
+get_n_percent_of_data <- function(data, n) {
+  num_samples <- nrow(data) * ( n / 100)
+  print(num_samples)
+  # get n percent of data
+  return(sample_n(data, num_samples))
+}
+
+
+## set the seed to make your partition reproducible
+split_data_n_percent <- function(data, n) {
+  set.seed(123)
+  train_ind <- sample(seq_len(nrow(movie_data)), size = sample_size)
+  train <- movie_data[train_ind, ]
+  test <- movie_data[-train_ind, ] 
+  ## internet solution
+  ## 90% of the sample size
+  sample_size <- floor(0.90 * nrow(movie_data))
+}
+
+
+```
+
+### test on data that isn't in set
+```{r}
+
+```
+
+
+
+#### Inflication adjust
+```{r}
+# Get value of $1.00
+inflation_adjust <- function(base_year=NA){  
+    require(dplyr)
+    require(xts)
+    if (nchar(base_year) == 4){
+    #Load file from BLS servers
+    temp<-tempfile()
+    download.file("http://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems",temp)
+    cu_main<-read.table(temp,
+                        header=FALSE,
+                        sep="t",
+                        skip=1,
+                        stringsAsFactors=FALSE,
+                        strip.white=TRUE)
+    colnames(cu_main)<-c("series_id", "year", "period", "value", "footnote_codes")
+    unlink(temp)
+    #Get rid of annual time periods and add real dates.
+    cu_main <- subset(cu_main,series_id=="CUSR0000SA0")
+    cu_main <- subset (cu_main,period!="M13")
+    cu_main <- subset (cu_main,period!="S01")
+    cu_main <- subset (cu_main,period!="S02")
+    cu_main <- subset (cu_main,period!="S03")
+    cu_main$date <-as.Date(paste(cu_main$year, cu_main$period,"01",sep="-"),"%Y-M%m-%d")
+    cu_main <- cu_main[c('date','value')]
+    cu_main <- xts(cu_main[,-1], order.by=cu_main[,1])
+    cu_main <- round(cu_main, 1)
+
+    # Get average yearly CPI.
+    avg.cpi <- apply.yearly(cu_main, mean)
+    avg.cpi <- round(avg.cpi, 1)
+    # Formula for calculating inflation example: $1.00 * (1980 CPI/ 2014 CPI) = 1980 price
+    cf <- avg.cpi/as.numeric(avg.cpi[as.character(base_year)])
+    colnames(cf) <- "adj_value"
+    #cf <- round(cf, 2)
+    dat <- merge(avg.cpi, cf)
+    # Xts object to data frame
+    dat <- data.frame(date=index(dat), coredata(dat))
+    dat$base.year <- as.character(base_year)
+    dat$pct_increase <- (1-dat$adj_value) * -100
+    # Round dollar amounts
+    dat$adj_value <- round(dat$adj_value, 2)
+    # Reorder cols in a more usable fassion
+    dat <- dat[c('date','base.year', 'adj_value', 'pct_increase')]
+    return(dat)
+    }
+    else {(message(
+        "***************************************************************************************
+        Please input a valid four digit year without quotes. For example: 2015.
+        ***************************************************************************************", appendLF = TRUE))
+    }
+}
+```
+
+
+
+
+
