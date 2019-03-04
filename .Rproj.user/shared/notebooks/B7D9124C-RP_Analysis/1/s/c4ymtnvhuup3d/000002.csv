@@ -1,0 +1,5 @@
+"0","clean_dat <- raw_dat %>% "
+"0","  select(user_id, user_sex, user_status, user_age, quest_id, q_name, dv) #%>% "
+"0","  filter(!is.na(q_name)) #filter out q_name NAs (testing runs)"
+"2","Error in filter(!is.na(q_name)) : object 'q_name' not found
+"

@@ -1,0 +1,12 @@
+---
+title: "Tree's whatever"
+author: '2146784'
+date: "4 March 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+ahoj
