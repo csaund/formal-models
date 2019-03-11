@@ -44,7 +44,7 @@ shinyApp(
                    tabPanel("Logistic Regression", "This panel is intentionally left blank")
                  )
                )),
-      tabPanel("Best Actor",
+      tabPanel("Building a Linear Model",
                sidebarPanel(
                  fileInput("file", "File input:"),
                  textInput("txt", "Text input:", "general"),
@@ -73,8 +73,13 @@ shinyApp(
                    tabPanel("Logistic Regression", "This panel is intentionally left blank")
                  )
                )),
-      tabPanel("Best Actress", "This panel is intentionally left blank"),
-      tabPanel("Best Film", "This panel is intentionally left blank")
+      tabPanel("Adding Predictors", "Multiple Regression is Cool"),
+      tabPanel("Inference",
+        mainPanel(
+          "Assess importance (coefficients) of predictors, 
+           What can your model tell you about relationships in your data?"
+        )),
+      tabPanel("Prediction", "CoDiNg TuToRiAlZ")
       )
   ),
   server = function(input, output) {
