@@ -7,6 +7,14 @@ Run app by going into `/app` and opening `ui.R` or `server.R` and hitting "Run A
 
 Run the tutorial by opening `/app/tutorial.Rmd` and hitting "Run Document"
 
+# TODO
+* Update and add questions to `tutorial.Rmd` to the questions site.
+* **Visualizations** for the linear regression tutorials
+* **Text** for linear regression tutorials
+* Add an "introduction" tab (move tabs over so they actually make sense)
+* maybe use the prediction section to actually make predictions using regression equation?
+* maybe tab on how regression equation is derived? Using real math? 
+
 ## 9/4/19
 
 ### Hello, Ladies. 
@@ -21,7 +29,11 @@ I made a few big ol' updates to some things.
 
 I discovered since `learnr` generates something that isn't quite an html, it cannot be embedded into a full shiny app (it actually is a shiny widget that creates a shiny app for itself.) 
 
-there is a lot of fancy markdown we can do within this tutorial, but I don't think we could make it a sophisticated UI with tabs and stuff. That being said, I'm not an R markdown wizard. We could probably create a page like [this](https://bookdown.org/yihui/rmarkdown/learnr-shiny.html). 
+there is a lot of fancy markdown we can do within this tutorial, but I don't think we could make it a sophisticated UI with tabs and stuff. That being said, I'm not an R markdown wizard. We could probably create a page like [this](https://bookdown.org/yihui/rmarkdown/learnr-shiny.html).
+
+Because data generation is a function, the same data can be used all throughout the server section, so if you use that data it will be the same as what's displayed in the original plot.
+
+Also, the other tabs are nothing right now, feel free to change them as you see fit. I mean really change whatever you like, we have *vErSiOn CoNtRoL* so nothing can hurt us.
 
 
 ### *XOXO* Caro

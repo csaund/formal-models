@@ -195,7 +195,20 @@ $(document).ready(function () {
 <div id="formal-models" class="section level1">
 <h1>formal-models</h1>
 <p>home of the R application for Formal Models of Spring 2019 at U of G</p>
-<p>server code is (should be) in <code>server.R</code>, ui code is (should be) in <code>ui.R</code></p>
+<p>server code is in <code>server.R</code>, ui code is in <code>ui.R</code></p>
+<p>Run app by going into <code>/app</code> and opening <code>ui.R</code> or <code>server.R</code> and hitting “Run App.” This should run the app.</p>
+<p>Run the tutorial by opening <code>/app/tutorial.Rmd</code> and hitting “Run Document”</p>
+</div>
+<div id="todo" class="section level1">
+<h1>TODO</h1>
+<ul>
+<li>Update and add questions to <code>tutorial.Rmd</code> to the questions site.</li>
+<li><strong>Visualizations</strong> for the linear regression tutorials</li>
+<li><strong>Text</strong> for linear regression tutorials</li>
+<li>Add an “introduction” tab (move tabs over so they actually make sense)</li>
+<li>maybe use the prediction section to actually make predictions using regression equation?</li>
+<li>maybe tab on how regression equation is derived? Using real math?</li>
+</ul>
 <div id="section" class="section level2">
 <h2>9/4/19</h2>
 <div id="hello-ladies." class="section level3">
@@ -211,6 +224,8 @@ $(document).ready(function () {
 </ul>
 <p>I discovered since <code>learnr</code> generates something that isn’t quite an html, it cannot be embedded into a full shiny app (it actually is a shiny widget that creates a shiny app for itself.)</p>
 <p>there is a lot of fancy markdown we can do within this tutorial, but I don’t think we could make it a sophisticated UI with tabs and stuff. That being said, I’m not an R markdown wizard. We could probably create a page like <a href="https://bookdown.org/yihui/rmarkdown/learnr-shiny.html">this</a>.</p>
+<p>Because data generation is a function, the same data can be used all throughout the server section, so if you use that data it will be the same as what’s displayed in the original plot.</p>
+<p>Also, the other tabs are nothing right now, feel free to change them as you see fit. I mean really change whatever you like, we have <em>vErSiOn CoNtRoL</em> so nothing can hurt us.</p>
 </div>
 </div>
 <div id="xoxo-caro" class="section level3">
