@@ -1,4 +1,8 @@
 library(ggvis)
+library(shiny)
+library(shinythemes)
+library(MASS)
+library(jtools)
 
 # For dropdown menu
 actionLink <- function(inputId, ...) {
@@ -11,36 +15,30 @@ actionLink <- function(inputId, ...) {
 ui <- tagList(
   fluidPage(theme = shinytheme("cosmo")),
   navbarPage(
-    "And the Academy Award goes to...",
+    "So Very Glaswegian",
     tabPanel("Introduction",
              sidebarPanel(
-               fileInput("File", "File input:"),
-               textInput("txt", "Text input:", "general"),
-               sliderInput("slider", "Slider input:", 1, 100, 30),
-               tags$h5("Deafult actionButton:"),
-               actionButton("action", "Search"),
+               # don't need these for right now
+               # fileInput("File", "File input:"),
+               # textInput("txt", "Text input:", "general"),
+               sliderInput("data_correlation", "Data correlation:", 0, 1, 0.3),
+               sliderInput("num_samples", "Number of datapoints:", 5, 500, 200),
                
-               tags$h5("actionButton with CSS class:"),
-               actionButton("action2", "Action button", class = "btn-primary")
+               tags$h5("Regenerate graph"),
+               actionButton("regenerate_data", "Action button", class = "btn-primary")
              ),
              mainPanel(
                tabsetPanel(
                  tabPanel("Prediction and Inference",
-                          h4("Table"),
-                          tableOutput("table"),
-                          h4("Verbatim text output"),
-                          verbatimTextOutput("txtout"),
-                          h1("Header 1"),
-                          h2("Header 2"),
-                          h3("Header 3"),
-                          h4("Header 4"),
-                          h5("Header 5")
+                          plotOutput("scatterPlot"),
+                          plotOutput("distPlot")
                  ),
                  tabPanel("Working with Data", "This panel is intentionally left blank"),
                  tabPanel("Linear Regression", "This panel is intentionally left blank"),
                  tabPanel("Logistic Regression", "This panel is intentionally left blank")
                )
-             )),
+             )
+    ),
     tabPanel("Building a Linear Model",
              sidebarPanel(
                fileInput("file", "File input:"),
@@ -76,51 +74,6 @@ ui <- tagList(
                "Assess importance (coefficients) of predictors, 
            What can your model tell you about relationships in your data?"
              )),
-    tabPanel("Prediction", "CoDiNg TuToRiAlZ"),
-    tabPanel("Movie Explorer",
-         fluidPage(
-           titlePanel("Movie explorer"),
-           fluidRow(
-             column(3,
-                    wellPanel(
-                      h4("Filter"),
-                      sliderInput("reviews", "Minimum number of reviews on Rotten Tomatoes",
-                                  10, 300, 80, step = 10),
-                      sliderInput("year", "Year released", 1940, 2014, value = c(1970, 2014),
-                                  sep = ""),
-                      sliderInput("oscars", "Minimum number of Oscar wins (all categories)",
-                                  0, 4, 0, step = 1),
-                      sliderInput("boxoffice", "Dollars at Box Office (millions)",
-                                  0, 800, c(0, 800), step = 1),
-                      selectInput("genre", "Genre (a movie can have multiple genres)",
-                                  c("All", "Action", "Adventure", "Animation", "Biography", "Comedy",
-                                    "Crime", "Documentary", "Drama", "Family", "Fantasy", "History",
-                                    "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi",
-                                    "Short", "Sport", "Thriller", "War", "Western")
-                      ),
-                      textInput("director", "Director name contains (e.g., Miyazaki)"),
-                      textInput("cast", "Cast names contains (e.g. Tom Hanks)")
-                    ),
-                    wellPanel(
-                      selectInput("xvar", "X-axis variable", axis_vars, selected = "Meter"),
-                      selectInput("yvar", "Y-axis variable", axis_vars, selected = "Reviews"),
-                      tags$small(paste0(
-                        "Note: The Tomato Meter is the proportion of positive reviews",
-                        " (as judged by the Rotten Tomatoes staff), and the Numeric rating is",
-                        " a normalized 1-10 score of those reviews which have star ratings",
-                        " (for example, 3 out of 4 stars)."
-                      ))
-                    )
-             ),
-             column(9,
-                    ggvisOutput("plot1"),
-                    wellPanel(
-                      span("Number of movies selected:",
-                           textOutput("n_movies")
-                      )
-                    )
-             )
-           )
-        ))
+    tabPanel("Prediction", "CoDiNg TuToRiAlZ")
   )
 )
