@@ -22,6 +22,7 @@ ui <- tagList(
                # fileInput("File", "File input:"),
                # textInput("txt", "Text input:", "general"),
                sliderInput("data_correlation", "Data correlation:", 0, 1, 0.3),
+               sliderInput("litre_range", "Range of consumption:", 0, 40, 1),
                sliderInput("num_samples", "Number of datapoints:", 5, 500, 200),
                
                tags$h5("Regenerate graph"),

@@ -3,50 +3,60 @@
 library(MASS)
 library(sn)
 library(mvtnorm) 
+library(ggplot2)
 
+corr <- 0.9
 
-
-# We will use the command mvrnorm to draw a matrix of variables
-
-# Let's keep it simple, 
-mu <- c(25,3)
-Sigma <- matrix(.7, nrow=2, ncol=2) + diag(2)*.3
-
-rawvars <- mvrnorm(n=10000, mu=mu, Sigma=Sigma)
-
-cov(rawvars); cor(rawvars)
-
-# We can see our normal sample produces results very similar to our 
-#specified covariance levels.
-
-# No lets transform some variables
-pvars <- pnorm(rawvars)
-
-# Through this process we already have 
-cov(pvars); cor(pvars)
-# We can see that while the covariances have dropped significantly, 
-# the simply correlations are largely the same.
-
-plot(rawvars[,1], pvars[,2], main="Normal of Var 1 with probabilities of Var 2") 
-
-expvars <- qexp(pvars)
-sknormvars <- qsn(pvars, 5, 2, 5)
-cor(expvars, rawvars)
-
-hist(sknormvars, breaks=20) 
-
-
-a <- rmvnorm(n=10000,mean=c(20,40),sigma=matrix(c(5,0.6*sqrt(50), 
-                                                  0.6*sqrt(50),10),2,2)) 
-
-plot(a)
-
-
-plot_correlated_data <- function(num_samples, correlation) {
+get_correlated_data <- function(num_samples, correlation) {
   data <- rmvnorm(n=num_samples,
-                  mean=c(20,40),
-                  sigma=matrix(c(5, correlation * sqrt(50), correlation * sqrt(50), 10), 2, 2))
-  return(data)
+                  mean=c(40,5),
+                  sigma=matrix(c(30, correlation * sqrt(50), correlation * sqrt(50), 5), 2, 2))
+  d <- data.frame(data)
+  colnames(d) <- c("age", "litres_irnbru_per_month")
+  return(d)
 }
 
-plot(plot_correlated_data(200, 0.8))
+d <- get_correlated_data(200, 1)
+
+plot(d)
+
+
+
+m <- matrix(c(3, corr * sqrt(50), corr * sqrt(50), 10), 2, 2)
+
+
+
+## using copula theory -- this one works much better
+complement <- function(y, rho, x) {
+  if (missing(x)) x <- rnorm(length(y)) # Optional: supply a default if `x` is not given
+  y.perp <- residuals(lm(x ~ y))
+  rho * sd(y.perp) * y + y.perp * sd(y) * sqrt(1 - rho^2)
+}
+
+
+scale_values <- function(data, tmin, tmax) {
+  rmin <- min(data)
+  rmax <- max(data)
+  scaled <- ((data - rmin) / (rmax - rmin)) * (tmax - tmin) + tmin
+  return(scaled)
+}
+
+generate_data_copula <- function(num_samples, correlation) {
+  ages <- runif(num_samples, min=0, max=87)
+  vals <- 1:num_samples # Optional
+  y = as.vector(sapply(correlation, function(correlation) complement(ages, correlation, vals)))
+  litres_per_month = scale_values(y, 0, 40)
+  X <- data.frame(litres_per_month,
+                  correlation=ordered(rep(signif(correlation, 2))),
+                  ages=ages) 
+  return(X)
+}
+
+e <- generate_data_copula(200, 0.4)
+
+ggplot(e, aes(ages,litres_per_month, group=correlation)) + 
+  geom_smooth(method="lm", color="Black") + 
+  #geom_rug(sides="b") + 
+  geom_point(aes(fill=correlation), alpha=1/2) 
+
+
