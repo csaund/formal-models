@@ -1,6 +1,5 @@
 library(ggvis)
 library(dplyr)
-
 library(RSQLite)
 library(dbplyr)
 
@@ -30,7 +29,14 @@ server = function(input, output) {
                       ages=ages) 
       return(X)
     }
-  
+    
+    output$quest <- renderUI({
+        question("please send help",
+          answer("ok"),
+          answer("you're on your own", correct=TRUE)
+         )
+      })
+    
     output$scatterPlot <- renderPlot({
       d <- generate_data(input$num_samples, input$data_correlation)
       ggplot(d, aes(ages,litres_per_month, group=correlation)) + 
@@ -38,17 +44,5 @@ server = function(input, output) {
         geom_point(aes(fill=correlation), alpha=1/2) 
     })
     
-    output$distPlot <- renderPlot({
-      states <- as.data.frame(state.x77)
-      fit <- lm(Income ~ Frost + Illiteracy + Murder, data = states)
-      effect_plot(fit, pred = Illiteracy, interval = TRUE, plot.points = TRUE)
-      
-      #x <- faithful$waiting
-      #bins <- seq(min(x), max(x), length.out = 20 + 1)
-      #
-      #hist(x, breaks = bins, col = "#75AADB", border = "white",
-      #     xlab = "Waiting time to next eruption (in mins)",
-      #     main = "Histogram of waiting times")
-      
-    })
+
   }

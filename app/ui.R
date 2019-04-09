@@ -3,6 +3,7 @@ library(shiny)
 library(shinythemes)
 library(MASS)
 library(jtools)
+library(learnr)
 
 # For dropdown menu
 actionLink <- function(inputId, ...) {
@@ -23,10 +24,10 @@ ui <- tagList(
                # textInput("txt", "Text input:", "general"),
                sliderInput("data_correlation", "Data correlation:", 0, 1, 0.3),
                sliderInput("litre_range", "Range of consumption:", 0, 40, 1),
-               sliderInput("num_samples", "Number of datapoints:", 5, 500, 200),
+               sliderInput("num_samples", "Number of datapoints:", 5, 500, 200)
                
-               tags$h5("Regenerate graph"),
-               actionButton("regenerate_data", "Action button", class = "btn-primary")
+               #tags$h5("Regenerate graph"),
+               #actionButton("regenerate_data", "Action button", class = "btn-primary")
              ),
              mainPanel(
                tabsetPanel(
@@ -34,42 +35,37 @@ ui <- tagList(
                           plotOutput("scatterPlot"),
                           plotOutput("distPlot")
                  ),
-                 tabPanel("Working with Data", "This panel is intentionally left blank"),
+                 tabPanel("R Tutorials", "This panel is intentionally left blank"),
                  tabPanel("Linear Regression", "This panel is intentionally left blank"),
                  tabPanel("Logistic Regression", "This panel is intentionally left blank")
                )
              )
     ),
-    tabPanel("Building a Linear Model",
-             sidebarPanel(
-               fileInput("file", "File input:"),
-               textInput("txt", "Text input:", "general"),
-               sliderInput("slider", "Slider input:", 1, 100, 30),
-               tags$h5("Deafult actionButton:"),
-               actionButton("action", "Search"),
-               
-               tags$h5("actionButton with CSS class:"),
-               actionButton("action2", "Action button", class = "btn-primary")
-             ),
-             mainPanel(
-               tabsetPanel(
-                 tabPanel("Prediction and Inference",
-                          h4("Table"),
-                          tableOutput("table"),
-                          h4("Verbatim text output"),
-                          verbatimTextOutput("txtout"),
-                          h1("Header 1"),
-                          h2("Header 2"),
-                          h3("Header 3"),
-                          h4("Header 4"),
-                          h5("Header 5")
-                 ),
-                 tabPanel("Working with Data", "This panel is intentionally left blank"),
-                 tabPanel("Linear Regression", "This panel is intentionally left blank"),
-                 tabPanel("Logistic Regression", "This panel is intentionally left blank")
+    tabPanel("R Code Tutorials",
+           mainPanel(
+             "Hello I hear you'd like to learn some R",
+             quiz(
+               question("What number is the letter A in the English alphabet?",
+                        answer("8"),
+                        answer("14"),
+                        answer("1", correct = TRUE),
+                        answer("23"),
+                        allow_retry = TRUE
+               ),
+               question("Please kill me?",
+                        answer("No, suffer through", correct = TRUE),
+                        answer("Ok."),
+                        answer("That would be too merciful", correct = TRUE),
+                        answer("Stay alive."),
+                        allow_retry = TRUE,
+                        random_answer_order = TRUE
                )
-             )),
-    tabPanel("Adding Predictors", "Multiple Regression is Cool"),
+             )
+           )
+    ),
+    tabPanel("Embedding Tutorials?", 
+       "Nope"
+   ),
     tabPanel("Inference",
              mainPanel(
                "Assess importance (coefficients) of predictors, 
