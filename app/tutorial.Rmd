@@ -1,5 +1,6 @@
 ---
 title: "Tutorial"
+author: "FM 2019 Team"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
