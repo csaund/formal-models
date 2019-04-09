@@ -1,0 +1,96 @@
+---
+title: "Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+Documentation for creating questions found [here](https://rstudio.github.io/learnr/questions.html)
+
+Cool cool nice these are good questions
+http://www.mhhe.com/cgi-bin/netquiz_get.pl?qfooter=/usr/web/home/mhhe/socscience/psychology/dunn/quizzes/test7fq.htm&test=/usr/web/home/mhhe/socscience/psychology/dunn/quizzes/test7q.txt&answers=/usr/web/home/mhhe/socscience/psychology/dunn/quizzes/test7a.txt&email=1
+
+
+Also good resource: 
+http://rstatistics.net/linear-regression-with-r-a-numeric-example/
+
+## R Coding Exercises
+
+### Exercise 
+
+*Here's a few exercises to get you started coding up a linear regression.*
+
+The first thing to do with any data set is plot it to get a feel for how the 
+data is distributed. 
+
+Write R Code to create a scatter plot with a smoothed line of speed vs. distance in the `cars` dataset:
+
+```{r scatter-plot, exercise=TRUE}
+scatter.smooth(...)
+```
+
+```{r scatter-plot-hint}
+# the main relationship we're going to examine is "Dist ~ Speed"
+x=cars$speed
+y=cars$dist
+scatter.smooth(x, y, main=...)
+```
+
+
+
+## Multiple Choice Questions
+
+### Quiz
+
+Some questions you should answer to verify you understand the motivation and mechanisms behind linear regression.
+
+```{r quiz math}
+x <- 42
+quiz(
+  question("When is regression analysis *inappropriate*?",
+    answer("you have two variables that are measured on an interval or ratio scale"),
+    answer("you are trying to predict one variable from another"),
+    answer("when plotted, your data forms a reasonably straight line"),
+    answer("when plotted, your data is heteroscedastic", correct = TRUE)
+  ),
+  question("A regression line...",
+    answer("passes through as many points as possible", correct = TRUE),
+    answer("minimizes squared distance from the points", correct = TRUE),
+    answer("goes through the average of each data point at a particular x value"),
+    answer("is used to classify new data")
+  ),
+  question("As the correlation coefficient (r) gets larger, our prediction for Y (the dependent variable)...",
+    answer("gets smaller"),
+    answer("does not change"),
+    answer("gets closer to the mean of Y"),
+    answer("gets closer to the mean of X", correct = TRUE)
+  ),
+  # this should be a proper question where we give a regression equation and ask them to 
+  # predict Y
+  question("Which equation correctly describes the regression line for Y in relation to X?",
+    answer(sprintf("$\\sqrt{x} = %d$", x + 1)),
+    answer(sprintf("$x ^ 2 = %d$", x^2))
+  ),
+  question("What does 'MSE' mean?...",
+    answer("placeholder"),
+    answer("placeholder2", correct = TRUE)
+  )
+)
+```
+
+![image to embed](images/img_0214.png)
+
+```{r quiz-2}
+quiz(
+  question("What do you think this is a picture of?",
+    answer("god only knows", correct=TRUE),
+    answer("why would you choose a random image from your downloads for this?")
+  )
+)
+
+```

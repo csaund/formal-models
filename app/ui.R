@@ -4,6 +4,8 @@ library(shinythemes)
 library(MASS)
 library(jtools)
 library(learnr)
+library(xml2)
+
 
 # For dropdown menu
 actionLink <- function(inputId, ...) {
@@ -43,34 +45,34 @@ ui <- tagList(
     ),
     tabPanel("R Code Tutorials",
            mainPanel(
-             "Hello I hear you'd like to learn some R",
-             quiz(
-               question("What number is the letter A in the English alphabet?",
-                        answer("8"),
-                        answer("14"),
-                        answer("1", correct = TRUE),
-                        answer("23"),
-                        allow_retry = TRUE
-               ),
-               question("Please kill me?",
-                        answer("No, suffer through", correct = TRUE),
-                        answer("Ok."),
-                        answer("That would be too merciful", correct = TRUE),
-                        answer("Stay alive."),
-                        allow_retry = TRUE,
-                        random_answer_order = TRUE
-               )
-             )
+             "Hello I hear you'd like to learn some R"
+#             quiz(
+#               question("What number is the letter A in the English alphabet?",
+#                        answer("8"),
+#                        answer("14"),
+#                        answer("1", correct = TRUE),
+#                        answer("23"),
+#                        allow_retry = TRUE
+#               ),
+#               question("Please kill me?",
+#                        answer("No, suffer through", correct = TRUE),
+#                        answer("Ok."),
+#                        answer("That would be too merciful", correct = TRUE),
+#                        answer("Stay alive."),
+#                        allow_retry = TRUE,
+#                        random_answer_order = TRUE
+#               )
+#             )
            )
     ),
     tabPanel("Embedding Tutorials?", 
-       "Nope"
+       # run_tutorial("hello", package="learnr")
+       rmarkdown::render("tutorial.Rmd")
+       #includeMarkdown("tutorial.Rmd")
    ),
-    tabPanel("Inference",
-             mainPanel(
-               "Assess importance (coefficients) of predictors, 
-           What can your model tell you about relationships in your data?"
-             )),
+    tabPanel("Separate link?",
+         tag("a", list(href = "tutorial.Rmd", "R Quiz"))
+    ),
     tabPanel("Prediction", "CoDiNg TuToRiAlZ")
   )
 )

@@ -1,0 +1,34 @@
+---
+title: "my tutorial"
+tutorial:
+  id: "com.example.tutorials.a-tutorial"
+  version: 1.0
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Exercise Example
+An R code question
+```{r add-function, exercise=TRUE, exercise.lines = 5}
+add <- function() {
+  
+}
+```
+
+### Quiz
+R Quiz Question
+```{r quiz}
+quiz(
+  question("Question 1",
+    answer("wrong"),
+    answer("also wrong"),
+    answer("right", correct = TRUE),
+    answer("wrong again")
+  )
+)
+```

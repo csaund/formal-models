@@ -30,12 +30,6 @@ server = function(input, output) {
       return(X)
     }
     
-    output$quest <- renderUI({
-        question("please send help",
-          answer("ok"),
-          answer("you're on your own", correct=TRUE)
-         )
-      })
     
     output$scatterPlot <- renderPlot({
       d <- generate_data(input$num_samples, input$data_correlation)
