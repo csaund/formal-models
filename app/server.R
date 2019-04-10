@@ -18,6 +18,16 @@ server = function(input, output) {
       return(scaled)
     }
     
+    # TODO this is where our tutorial app will be!!
+    # It needs to be published in the shiny app site so I will work on that. 
+    # Note: It only renders in-browser so just running the app locally will
+    # not have it show up!
+    output$tutorial <- renderUI({
+      tags$iframe(
+        src="https://jjallaire.shinyapps.io/learnr-tutorial-03a-data-manip-filter/", width=1280, height=720
+      )
+    })
+    
     generate_data <- function(num_samples, correlation) {
       ages <- runif(num_samples, min=0, max=87)
       vals <- 1:num_samples # Optional

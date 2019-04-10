@@ -65,10 +65,10 @@ ui <- tagList(
 #             )
            )
     ),
-    tabPanel("Embedding Tutorials?", 
-       # run_tutorial("hello", package="learnr")
-       rmarkdown::render("tutorial.Rmd")
-       #includeMarkdown("tutorial.Rmd")
+    tabPanel("Embedding Tutorials?",
+       # and this is where the output actually ends up. I think leaving it 
+       # as its own proper tab is the way.
+       htmlOutput("tutorial")
    ),
     tabPanel("Separate link?",
          tag("a", list(href = "tutorial.Rmd", "R Quiz"))
