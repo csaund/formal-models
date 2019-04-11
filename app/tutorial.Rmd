@@ -22,7 +22,7 @@ http://rstatistics.net/linear-regression-with-r-a-numeric-example/
 
 ### Coding in R
 
-## Exercise 1: Plotting
+## R Exercises: Plotting
 
 *Here's a few exercises to get you started coding up a linear regression.*
 
@@ -31,12 +31,30 @@ data is distributed.
 
 Let's store the speed from the cars package (cars$speed) as x and distance as y and plot them. 
 
-```{r scatterplot, exercise = TRUE}
+```{r corplot, exercise = TRUE}
 x=...
 y=...
 plot(...)
 ```
-The graph you produced should show you a correlation of speed and distance datapoints. 
+
+```{r corplot-hint-1}
+x=cars$speed
+y=...
+plot(...)
+```
+
+```{r corplot-hint-2}
+x=cars$speed
+y=...
+plot(x,y)
+```
+
+The graph you produced shows you a correlation of speed and distance datapoints. 
+
+You can calculate this correlation:
+```{r cor, exercise = TRUE}
+cor(...)
+```
 
 Now we can use the `scatter.smooth()` function to create a scatter plot with an added smoothed line of speed vs. distance in the `cars` dataset:
 
@@ -51,32 +69,33 @@ y=cars$dist
 scatter.smooth(x, y, main=...)
 ```
 
+As you can see, while the line fits the data, it is not straight (linear), therefore does not allow us to make predictions. You will see how it differs from the visualisation of the linear regression later on. 
 
+Let's create the linear model and store it in a variable `mod`. The syntax for these models is `predicted variable` ~ `predctor(s)`.
 
-## Exercise 2: Maths
-
-Correlation
-```{r correlation, exercise=TRUE}
-# use the `cor` function!
+```{r lm, exercise  = TRUE}
+mod <- lm(...)
 ```
 
-```{r correlation-hint}
-cor(cars$speed, cars$dist)  # calculate correlation between speed and distance 
+```{r lm-solution}
+mod <- lm(y~x)
 ```
 
-Using `lm()`
-```{r lm, exercise=TRUE}
-# use lm to do some stuff
+Now let's use the original plot and add a linear prediction line based on the model (`mod`) you just created.
+
+```{r modline, exercise  = TRUE}
+plot(..., abline(...))
 ```
 
-```{r lm-hint}
-cor(cars$speed, cars$dist)  # calculate correlation between speed and distance 
+```{r modline-hint}
+plot(..., abline(mod))
 ```
 
-Now look at the summary
-```{r lm-sum, exercise=TRUE}
+```{r modline-solution}
+plot(x, y, abline(mod))
 
 ```
+
 
 ## Questions
 
@@ -103,4 +122,3 @@ question("To calculate a simple linear regression, both X and Y need to be (typi
 
 ```
 
-x and y need to be (typically) numeric/continuous  vs categorical/factor

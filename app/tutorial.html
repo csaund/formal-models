@@ -51,18 +51,33 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="section-coding-in-r" class="section level3">
 <h3>Coding in R</h3>
 </div>
-<div id="section-exercise-1-plotting" class="section level2">
-<h2>Exercise 1: Plotting</h2>
+<div id="section-r-exercises-plotting" class="section level2">
+<h2>R Exercises: Plotting</h2>
 <p><em>Here’s a few exercises to get you started coding up a linear regression.</em></p>
 <p>The first thing to do with any data set is plot it to get a feel for how the data is distributed.</p>
 <p>Let’s store the speed from the cars package (cars$speed) as x and distance as y and plot them.</p>
-<div class="tutorial-exercise" data-label="scatterplot" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<div class="tutorial-exercise" data-label="corplot" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>x=...
 y=...
 plot(...)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
-<p>The graph you produced should show you a correlation of speed and distance datapoints.</p>
+<div class="tutorial-exercise-support" data-label="corplot-hint-1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>x=cars$speed
+y=...
+plot(...)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="corplot-hint-2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>x=cars$speed
+y=...
+plot(x,y)</code></pre>
+</div>
+<p>The graph you produced shows you a correlation of speed and distance datapoints.</p>
+You can calculate this correlation:
+<div class="tutorial-exercise" data-label="cor" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>cor(...)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
 <p>Now we can use the <code>scatter.smooth()</code> function to create a scatter plot with an added smoothed line of speed vs. distance in the <code>cars</code> dataset:</p>
 <div class="tutorial-exercise" data-label="scatter-plot" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>scatter.smooth(...)</code></pre>
@@ -74,59 +89,56 @@ x=cars$speed
 y=cars$dist
 scatter.smooth(x, y, main=...)</code></pre>
 </div>
-</div>
-<div id="section-exercise-2-maths" class="section level2">
-<h2>Exercise 2: Maths</h2>
-Correlation
-<div class="tutorial-exercise" data-label="correlation" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code># use the `cor` function!</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
-</div>
-<div class="tutorial-exercise-support" data-label="correlation-hint" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>cor(cars$speed, cars$dist)  # calculate correlation between speed and distance </code></pre>
-</div>
-Using <code>lm()</code>
+<p>As you can see, while the line fits the data, it is not straight (linear), therefore does not allow us to make predictions. You will see how it differs from the visualisation of the linear regression later on.</p>
+<p>Let’s create the linear model and store it in a variable <code>mod</code>. The syntax for these models is <code>predicted variable</code> ~ <code>predctor(s)</code>.</p>
 <div class="tutorial-exercise" data-label="lm" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code># use lm to do some stuff</code></pre>
+<pre class="text"><code>mod &lt;- lm(...)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
-<div class="tutorial-exercise-support" data-label="lm-hint" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>cor(cars$speed, cars$dist)  # calculate correlation between speed and distance </code></pre>
+<div class="tutorial-exercise-support" data-label="lm-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>mod &lt;- lm(y~x)</code></pre>
 </div>
-Now look at the summary
-<div class="tutorial-exercise" data-label="lm-sum" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<p>Now let’s use the original plot and add a linear prediction line based on the model (<code>mod</code>) you just created.</p>
+<div class="tutorial-exercise" data-label="modline" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>plot(..., abline(...))</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="modline-hint" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>plot(..., abline(mod))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="modline-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>plot(x, y, abline(mod))</code></pre>
 </div>
 </div>
 <div id="section-questions" class="section level2">
 <h2>Questions</h2>
 <p>The Basics 
-<div id="htmlwidget-88fa564c83dd0fa0e2bb" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-918deddbd26f79a34608" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-88fa564c83dd0fa0e2bb">{"x":{"question":"In a simple linear regression, the X is the... ","answers":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"label":"x-pred","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the X is the... ","a":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script></p>
+<script type="application/json" data-for="htmlwidget-918deddbd26f79a34608">{"x":{"question":"In a simple linear regression, the X is the... ","answers":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"label":"x-pred","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the X is the... ","a":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script></p>
 
-<div id="htmlwidget-8d75ae03b166a9d2cbce" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-8c5552c7b5d2e4872a93" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-8d75ae03b166a9d2cbce">{"x":{"question":"In a simple linear regression, the Y is the... ","answers":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"label":"y-dv","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the Y is the... ","a":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-8c5552c7b5d2e4872a93">{"x":{"question":"In a simple linear regression, the Y is the... ","answers":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"label":"y-dv","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the Y is the... ","a":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
 
-<div id="htmlwidget-95458af996c600f40c23" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-02225b7c8af4b6b8cf5a" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-95458af996c600f40c23">{"x":{"question":"To calculate a simple linear regression, both X and Y need to be (typically)... ","answers":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"label":"xy-cont","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"To calculate a simple linear regression, both X and Y need to be (typically)... ","a":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-02225b7c8af4b6b8cf5a">{"x":{"question":"To calculate a simple linear regression, both X and Y need to be (typically)... ","answers":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"label":"xy-cont","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"To calculate a simple linear regression, both X and Y need to be (typically)... ","a":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
 x and y need to be (typically) numeric/continuous vs categorical/factor 
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
@@ -138,9 +150,16 @@ learnr:::register_http_handlers(session, metadata = NULL)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-scatterplot-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-scatterplot-code-editor`)), session)
-output$`tutorial-exercise-scatterplot-output` <- renderUI({
-  `tutorial-exercise-scatterplot-result`()
+`tutorial-exercise-corplot-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-corplot-code-editor`)), session)
+output$`tutorial-exercise-corplot-output` <- renderUI({
+  `tutorial-exercise-corplot-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-cor-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-cor-code-editor`)), session)
+output$`tutorial-exercise-cor-output` <- renderUI({
+  `tutorial-exercise-cor-result`()
 })
 </script>
  
@@ -152,13 +171,6 @@ output$`tutorial-exercise-scatter-plot-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-correlation-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-correlation-code-editor`)), session)
-output$`tutorial-exercise-correlation-output` <- renderUI({
-  `tutorial-exercise-correlation-result`()
-})
-</script>
- 
-<script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-lm-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-lm-code-editor`)), session)
 output$`tutorial-exercise-lm-output` <- renderUI({
   `tutorial-exercise-lm-result`()
@@ -166,9 +178,9 @@ output$`tutorial-exercise-lm-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-lm-sum-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-lm-sum-code-editor`)), session)
-output$`tutorial-exercise-lm-sum-output` <- renderUI({
-  `tutorial-exercise-lm-sum-result`()
+`tutorial-exercise-modline-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-modline-code-editor`)), session)
+output$`tutorial-exercise-modline-output` <- renderUI({
+  `tutorial-exercise-modline-result`()
 })
 </script>
  <!--html_preserve-->
