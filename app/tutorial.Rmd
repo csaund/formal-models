@@ -20,6 +20,9 @@ http://www.mhhe.com/cgi-bin/netquiz_get.pl?qfooter=/usr/web/home/mhhe/socscience
 Also good resource: 
 http://rstatistics.net/linear-regression-with-r-a-numeric-example/
 
+Good exercise inspo:
+https://www.machinelearningplus.com/machine-learning/complete-introduction-linear-regression-r/ 
+
 ### Coding in R
 
 ## R Exercises: Plotting
@@ -29,7 +32,7 @@ http://rstatistics.net/linear-regression-with-r-a-numeric-example/
 The first thing to do with any data set is plot it to get a feel for how the 
 data is distributed. 
 
-Let's store the speed from the cars package (cars$speed) as x and distance as y and plot them. 
+Let's store the speed from the `cars` package (cars$speed) as x and distance as y and plot them. 
 
 ```{r corplot, exercise = TRUE}
 x=...
@@ -49,14 +52,9 @@ y=...
 plot(x,y)
 ```
 
-The graph you produced shows you a correlation of speed and distance datapoints. 
+The graph you produced shows the speed and distance datapoints. 
 
-You can calculate this correlation:
-```{r cor, exercise = TRUE}
-cor(...)
-```
-
-Now we can use the `scatter.smooth()` function to create a scatter plot with an added smoothed line of speed vs. distance in the `cars` dataset:
+Now we can use the `scatter.smooth()` function to create a scatter plot with an added smoothed line which will visualise the speed vs. distance correlation.
 
 ```{r scatter-plot, exercise=TRUE}
 scatter.smooth(...)
@@ -69,8 +67,15 @@ y=cars$dist
 scatter.smooth(x, y, main=...)
 ```
 
-As you can see, while the line fits the data, it is not straight (linear), therefore does not allow us to make predictions. You will see how it differs from the visualisation of the linear regression later on. 
+As you can see, the line suggests a positive (and a linear) correlation. This is a good sign if we want to calculate a simple linear regression! 
 
+You can calculate this correlation:
+```{r cor, exercise = TRUE}
+cor(...)
+```
+
+The smooth line fits the data but only shows the positive relationship and does not allow us to make predictions. You will see how it differs from the visualisation of the linear regression later on.
+ 
 Let's create the linear model and store it in a variable `mod`. (The syntax for these models is `predicted variable` ~ `predctor(s)`.)
 
 ```{r lm, exercise  = TRUE}
@@ -103,6 +108,8 @@ plot(x, y, abline(mod))
 ```
 
 Notice the difference between this predictive line and the line fitting the data (using `scatter.smooth`).
+
+
 
 ## Questions
 
