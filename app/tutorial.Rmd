@@ -29,7 +29,16 @@ http://rstatistics.net/linear-regression-with-r-a-numeric-example/
 The first thing to do with any data set is plot it to get a feel for how the 
 data is distributed. 
 
-Write R Code to create a scatter plot with a smoothed line of speed vs. distance in the `cars` dataset:
+Let's store the speed from the cars package (cars$speed) as x and distance as y and plot them. 
+
+```{r scatterplot, exercise = TRUE}
+x=...
+y=...
+plot(...)
+```
+The graph you produced should show you a correlation of speed and distance datapoints. 
+
+Now we can use the `scatter.smooth()` function to create a scatter plot with an added smoothed line of speed vs. distance in the `cars` dataset:
 
 ```{r scatter-plot, exercise=TRUE}
 scatter.smooth(...)
@@ -69,3 +78,29 @@ Now look at the summary
 
 ```
 
+## Questions
+
+The Basics
+```{r x-pred, echo=FALSE}
+question("In a simple linear regression, the X is the... ",
+  answer("predictor", correct = TRUE),
+  answer("dependent variable")
+)
+```
+
+```{r y-dv, echo=FALSE}
+question("In a simple linear regression, the Y is the... ",
+  answer("predictor"),
+  answer("dependent variable", correct = TRUE)
+)
+```
+
+```{r xy-cont, echo=FALSE}
+question("To calculate a simple linear regression, both X and Y need to be (typically)... ",
+  answer("categorical/factor"),
+  answer("numeric/continuous", correct = TRUE)
+)
+
+```
+
+x and y need to be (typically) numeric/continuous  vs categorical/factor
