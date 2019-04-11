@@ -15,6 +15,42 @@ actionLink <- function(inputId, ...) {
          ...)
 }
 
+R_quiz <- quiz(
+  question("When is regression analysis *inappropriate*?",
+           answer("you have two variables that are measured on an interval or ratio scale"),
+           answer("you are trying to predict one variable from another"),
+           answer("when plotted, your data forms a reasonably straight line"),
+           answer("when plotted, your data is heteroscedastic", correct = TRUE)
+  ),
+  question("A regression line...",
+           answer("passes through as many points as possible", correct = TRUE),
+           answer("minimizes squared distance from the points", correct = TRUE),
+           answer("goes through the average of each data point at a particular x value"),
+           answer("is used to classify new data")
+  ),
+  question("As the correlation coefficient (r) gets larger, our prediction for Y (the dependent variable)...",
+           answer("gets smaller"),
+           answer("does not change"),
+           answer("gets closer to the mean of Y"),
+           answer("gets closer to the mean of X", correct = TRUE)
+  ),
+  # this should be a proper question where we give a regression equation and ask them to 
+  # predict Y
+  question("Which equation correctly describes the regression line for Y in relation to X?",
+           answer(sprintf("$\\sqrt{x} = %d$", x + 1)),
+           answer(sprintf("$x ^ 2 = %d$", x^2))
+  ),
+  question("What does 'MSE' mean?...",
+           answer("placeholder"),
+           answer("placeholder2", correct = TRUE)
+  ),
+  ## we can embed images here too
+  question("What do you think this is a picture of?",
+           answer("god only knows", correct=TRUE),
+           answer("why would you choose a random image from your downloads for this?")
+  )
+)
+
 # tag("a", list(href = "tutorial.Rmd", "R Quiz"))
 # include an external link like this ^^
 
@@ -76,23 +112,7 @@ ui <- tagList(
     tabPanel("Quiz",
            mainPanel(
              "Hello I hear you'd like to learn some R",
-             quiz(
-               question("What number is the letter A in the English alphabet?",
-                        answer("8"),
-                        answer("14"),
-                        answer("1", correct = TRUE),
-                        answer("23"),
-                        allow_retry = TRUE
-               ),
-               question("Please kill me?",
-                        answer("No, suffer through", correct = TRUE),
-                        answer("Ok."),
-                        answer("That would be too merciful", correct = TRUE),
-                        answer("Stay alive."),
-                        allow_retry = TRUE,
-                        random_answer_order = TRUE
-               )
-             )
+             R_quiz
            )
     )
   )
