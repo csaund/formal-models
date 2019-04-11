@@ -90,7 +90,7 @@ y=cars$dist
 scatter.smooth(x, y, main=...)</code></pre>
 </div>
 <p>As you can see, while the line fits the data, it is not straight (linear), therefore does not allow us to make predictions. You will see how it differs from the visualisation of the linear regression later on.</p>
-<p>Let’s create the linear model and store it in a variable <code>mod</code>. The syntax for these models is <code>predicted variable</code> ~ <code>predctor(s)</code>.</p>
+<p>Let’s create the linear model and store it in a variable <code>mod</code>. (The syntax for these models is <code>predicted variable</code> ~ <code>predctor(s)</code>.)</p>
 <div class="tutorial-exercise" data-label="lm" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>mod &lt;- lm(...)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
@@ -113,33 +113,33 @@ scatter.smooth(x, y, main=...)</code></pre>
 <div id="section-questions" class="section level2">
 <h2>Questions</h2>
 <p>The Basics 
-<div id="htmlwidget-918deddbd26f79a34608" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-9f2ca3322bbaecccb5fe" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-918deddbd26f79a34608">{"x":{"question":"In a simple linear regression, the X is the... ","answers":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"label":"x-pred","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the X is the... ","a":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script></p>
+<script type="application/json" data-for="htmlwidget-9f2ca3322bbaecccb5fe">{"x":{"question":"In a simple linear regression, the X is the... ","answers":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"label":"x-pred","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the X is the... ","a":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script></p>
 
-<div id="htmlwidget-8c5552c7b5d2e4872a93" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-269305d78ca0c2eaa73e" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-8c5552c7b5d2e4872a93">{"x":{"question":"In a simple linear regression, the Y is the... ","answers":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"label":"y-dv","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the Y is the... ","a":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-269305d78ca0c2eaa73e">{"x":{"question":"In a simple linear regression, the Y is the... ","answers":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"label":"y-dv","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the Y is the... ","a":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
 
-<div id="htmlwidget-02225b7c8af4b6b8cf5a" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-75c0c76b91c779cbdb78" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-02225b7c8af4b6b8cf5a">{"x":{"question":"To calculate a simple linear regression, both X and Y need to be (typically)... ","answers":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"label":"xy-cont","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"To calculate a simple linear regression, both X and Y need to be (typically)... ","a":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
-x and y need to be (typically) numeric/continuous vs categorical/factor 
+<script type="application/json" data-for="htmlwidget-75c0c76b91c779cbdb78">{"x":{"question":"To calculate a simple linear regression, both X and Y need to be (typically)... ","answers":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"label":"xy-cont","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"To calculate a simple linear regression, both X and Y need to be (typically)... ","a":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
 knitr::opts_chunk$set(echo = FALSE)

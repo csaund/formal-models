@@ -71,7 +71,7 @@ scatter.smooth(x, y, main=...)
 
 As you can see, while the line fits the data, it is not straight (linear), therefore does not allow us to make predictions. You will see how it differs from the visualisation of the linear regression later on. 
 
-Let's create the linear model and store it in a variable `mod`. The syntax for these models is `predicted variable` ~ `predctor(s)`.
+Let's create the linear model and store it in a variable `mod`. (The syntax for these models is `predicted variable` ~ `predctor(s)`.)
 
 ```{r lm, exercise  = TRUE}
 mod <- lm(...)
@@ -81,7 +81,13 @@ mod <- lm(...)
 mod <- lm(y~x)
 ```
 
-Now let's use the original plot and add a linear prediction line based on the model (`mod`) you just created.
+Look at the summary of the model `mod`
+
+```{r summary, exercise = TRUE}
+summary(...)
+```
+
+Now let's use the original plot and add a linear prediction line based on the model (`mod`) you just created.  
 
 ```{r modline, exercise  = TRUE}
 plot(..., abline(...))
@@ -96,6 +102,7 @@ plot(x, y, abline(mod))
 
 ```
 
+Notice the difference between this predictive line and the line fitting the data (using `scatter.smooth`).
 
 ## Questions
 
