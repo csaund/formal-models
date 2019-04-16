@@ -10,19 +10,6 @@ library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-
-Documentation for creating questions found [here](https://rstudio.github.io/learnr/questions.html)
-
-Cool cool nice these are good questions
-http://www.mhhe.com/cgi-bin/netquiz_get.pl?qfooter=/usr/web/home/mhhe/socscience/psychology/dunn/quizzes/test7fq.htm&test=/usr/web/home/mhhe/socscience/psychology/dunn/quizzes/test7q.txt&answers=/usr/web/home/mhhe/socscience/psychology/dunn/quizzes/test7a.txt&email=1
-
-
-Also good resource: 
-http://rstatistics.net/linear-regression-with-r-a-numeric-example/
-
-Good exercise inspo:
-https://www.machinelearningplus.com/machine-learning/complete-introduction-linear-regression-r/ 
-
 ### Coding in R
 
 ## Logistic models in R
