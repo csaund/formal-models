@@ -25,6 +25,21 @@ https://www.machinelearningplus.com/machine-learning/complete-introduction-linea
 
 ### Coding in R
 
+## glm output interpretation 
+
+Using the `summary()` function you viewed the details of the logistic regression model. Now how to interpret what you see?
+
+sum_path <- "images/my_summary.JPG"
+sum <- readJPEG(sum_path)
+dim(sum)
+![glm summary](images/my_summary.JPG)
+
+### Call
+The first line of the summary is simply showing you the original call to the `glm()` function 
+
+### deviance residuals
+The next bit gives you a summary of the deviance residuals. For the purpose of this tutorial we won't go into details about how these are calculated. In the logistic regression the deviance residuals are not as useful. However, you should look out for properties similar to regular residuals. That is ideally they should be centered closely to 0 and roughly symmetrical. 
+
 ## R Exercises: Plotting
 
 *Here's a few exercises to get you started coding up a linear regression.*

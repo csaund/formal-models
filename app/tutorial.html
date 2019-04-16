@@ -52,6 +52,22 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="section-coding-in-r" class="section level3">
 <h3>Coding in R</h3>
 </div>
+<div id="section-glm-output-interpretation" class="section level2">
+<h2>glm output interpretation</h2>
+<p>Using the <code>summary()</code> function you viewed the details of the logistic regression model. Now how to interpret what you see?</p>
+<div class="figure">
+<img src="images/my_summary.JPG" alt="glm summary" />
+<p class="caption">glm summary</p>
+</div>
+<div id="section-call" class="section level3">
+<h3>Call</h3>
+<p>The first line of the summary is simply showing you the original call to the <code>glm()</code> function</p>
+</div>
+<div id="section-deviance-residuals" class="section level3">
+<h3>deviance residuals</h3>
+<p>The next bit gives you a summary of the deviance residuals. For the purpose of this tutorial we won’t go into details about how these are calculated. In the logistic regression the deviance residuals are not as useful. However, you should look out for properties similar to regular residuals. That is ideally they should be centered closely to 0 and roughly symmetrical.</p>
+</div>
+</div>
 <div id="section-r-exercises-plotting" class="section level2">
 <h2>R Exercises: Plotting</h2>
 <p><em>Here’s a few exercises to get you started coding up a linear regression.</em></p>
@@ -121,32 +137,32 @@ You can calculate this correlation:
 <div id="section-questions" class="section level2">
 <h2>Questions</h2>
 <p>The Basics 
-<div id="htmlwidget-a01e67d5594827615b61" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-eed5ded245774f1349bf" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-a01e67d5594827615b61">{"x":{"question":"In a simple linear regression, the X is the... ","answers":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"label":"x-pred","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the X is the... ","a":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script></p>
+<script type="application/json" data-for="htmlwidget-eed5ded245774f1349bf">{"x":{"question":"In a simple linear regression, the X is the... ","answers":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"label":"x-pred","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the X is the... ","a":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script></p>
 
-<div id="htmlwidget-76a501c23add5908464b" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-71a6fe361e4aa515bcc2" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-76a501c23add5908464b">{"x":{"question":"In a simple linear regression, the Y is the... ","answers":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"label":"y-dv","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the Y is the... ","a":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-71a6fe361e4aa515bcc2">{"x":{"question":"In a simple linear regression, the Y is the... ","answers":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"label":"y-dv","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the Y is the... ","a":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
 
-<div id="htmlwidget-a61b821267b911b468cf" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-22fae811d8cd40a1f25d" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-a61b821267b911b468cf">{"x":{"question":"To calculate a simple linear regression, both X and Y need to be (typically)... ","answers":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"label":"xy-cont","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"To calculate a simple linear regression, both X and Y need to be (typically)... ","a":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-22fae811d8cd40a1f25d">{"x":{"question":"To calculate a simple linear regression, both X and Y need to be (typically)... ","answers":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"label":"xy-cont","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"To calculate a simple linear regression, both X and Y need to be (typically)... ","a":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
 
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
