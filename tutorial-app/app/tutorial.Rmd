@@ -186,9 +186,9 @@ knitr::include_graphics(path = extra_path)
 
 If we were to use our model to predict ice behaviour for some hypothetical temperatures, we would see that: In the instance of a temperature way over zero, the corresponding point on our regression line suggests that there is a probability very close to 1 that the ice will break. With a temperature just above zero the probability is lower but still pretty close to 1. And with a temperature below zero the probability is very close to 0 and the ice is unlikely to break. 
 
-## Linear Regression: Review
+## Linear Regression: Refresher
 
-*Here's a few exercises to get you started coding up a linear regression.*
+*Here's a few exercises if you need to refresh your memories of a linear regression.*
 
 The first thing to do with any data set is plot it to get a feel for how the 
 data is distributed. 

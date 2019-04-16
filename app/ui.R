@@ -82,7 +82,7 @@ ui <- tagList(
          mainPanel(
            navlistPanel(
              "",
-             tabPanel("Why Use Logistic Regression",
+             tabPanel("Building an interactive model",
                       h2("Binary Logistic Regression"),
                       p(logistic_box_office),
                       fluidRow(
@@ -120,22 +120,22 @@ ui <- tagList(
                         tags$li("A reasonable sample size especially when one outcome is a lot less likely than the other.")
                       )
              ),
-             tabPanel("Uses",
+             tabPanel("Why Use Logistic Regression",
                       h2("Why Use This Technique?"),
                       p(inf_pred_intro),
                       p(inference),
                       p(pred)
              ),
-             tabPanel("How",
+             tabPanel("So how do I do it?",
                       h3("How do I implement a Logistic Regression Model?"),
                       p(how_to_use),
                       tags$ul(
-                        tags$li("Generating appropriate data for Logistic Regression"),
-                        tags$li("How to create a logistic regression model"),
-                        tags$li("Interpreting the output of such a model, and"),
-                        tags$li("Visualizing logistic regression")
+                        tags$li("Generate appropriate data for Logistic Regression"),
+                        tags$li("Create a logistic regression model"),
+                        tags$li("Interpret the output of such a model, and"),
+                        tags$li("Visualize logistic regression")
                       ),
-                      p("After you're finished take our quiz to help understand what you know and don't yet know about Logistic Regression Modles")
+                      p("After you're finished take our quiz to help see what you know and don't yet know about Logistic Regression Modles")
            )
          )
        )
