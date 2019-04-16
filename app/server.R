@@ -49,12 +49,14 @@ server = function(input, output) {
     }
     
     output$rawPlot <- renderPlot({
-      mydf = generate_logistic_data(input$logistic_n, input$c1) 
+      mydf = generate_logistic_data(100, 3) 
       mydf$y1 <- as.character(mydf$y)
       mydf$y <- as.character(mydf$y)
       mydf$Actual_Outcome<- ifelse(mydf$y==0,"Eels","No Eels")
+      
       ggplot(data = mydf, aes(x1, y)) +
         geom_point(aes(color=Actual_Outcome, shape=Actual_Outcome, fill=Actual_Outcome), alpha=0.4, size=5) +
+        geom_abline(intercept=1.4, slope=0.46) +
         ggtitle("Our Binary Data") +
         xlab("Predictor Variable") +
         ylab(" No Eels or Eels all over the shop")      
@@ -64,12 +66,12 @@ server = function(input, output) {
       mydf = generate_logistic_data(input$logistic_n, input$c1) 
       mydf$y1 <- as.character(mydf$y)
       mydf$y <- as.character(mydf$y)
-      mydf$Actual_Outcome<- ifelse(mydf$y==0,"Eels","No Eels")
+      mydf$Actual_Outcome<- ifelse(mydf$y==0,"No Oscar","Oscar")
       ggplot(data = mydf, aes(x1, y)) +
         geom_point(aes(color=Actual_Outcome, shape=Actual_Outcome, fill=Actual_Outcome), alpha=0.4, size=5) +
         ggtitle("Our Binary Data") +
         xlab("Predictor Variable") +
-        ylab(" No Eels or Eels all over the shop")
+        ylab("Movies Which Won an Oscar")
     })
     
     output$logisticPlot <- renderPlot({
@@ -79,7 +81,7 @@ server = function(input, output) {
       names(prob) <- c("prob")
       mydf <- dplyr::bind_cols(dat, prob) 
       mydf$y <- as.character(mydf$y)
-      mydf$Actual_Outcome<- ifelse(mydf$y==0,"Eels","No Eels")
+      mydf$Actual_Outcome<- ifelse(mydf$y==0,"No Oscar","Oscar")
       
       
       ggplot(data = mydf, aes(x1, prob)) +
