@@ -88,6 +88,7 @@ model <- glm(speed ~ dist, family="binomial", data=cars)
 Using the `summary()` function you viewed the details of the logistic regression model. Now how to interpret what you see?
 
 ```{r}
+library(jpeg)
 sum_path <- "images/my_summary.JPG"
 knitr::include_graphics(path = sum_path)
 
@@ -132,7 +133,8 @@ coef_path <- "images/my_summary_coef.jpg"
 knitr::include_graphics(path = coef_path)
 ```
 
-In this section we can see the coefficient estimates (coefficients or our "betas" in the model if you'd imagine the equation), including the intercept, the standard errors of the coeffiecients, z-values (which are basically values of the estimates divided by the standard errors), and lastly p-values telling us how statistically significant each of your predictors is (in our case our one predictor is significant). 
+In this section we can see the coefficient estimates (coefficients - or our "betas" in the model if you'd imagine the equation), including the intercept, the standard errors of the coeffiecients, z-values (which are basically values of the estimates divided by the standard errors), and lastly p-values telling us how statistically significant each of your predictors is (in our case our one predictor is significant). We will relate back to this later.
+
 
 This refers to the change in log odds per one unit increase of the variable. The effect on probability can be caluculated from log odds. Using the inverse logit function P=exp(logit)/1+exp(logit) we can calculate the probability of our outcome like this.
 
@@ -222,7 +224,29 @@ plot(x, y, abline(mod))
 
 Notice the difference between this predictive line and the line fitting the data (using `scatter.smooth`).
 
+### Dispersion parameter
+```{r}
+disp_path <- "images/my_summary_disp.jpg"
+knitr::include_graphics(path = disp_path)
+```
 
+_You will probably ignore this_ Unlike in linear regression where we estimate both mean and variance, in logistic regression we estimate the mean of the data and the variance is derived from the mean. There is then a chance that the variance could be underestimated. If that's the case, it can be changed from the default in `summary()`.
+
+### Null and residual deviance
+```{r}
+devi_path <- "images/my_summary_devi.jpg"
+knitr::include_graphics(path = devi_path)
+```
+
+_You will probably ignore this_ These can be used to compare models, calculate R^2 and the oeverall p-value. 
+
+### AIC score
+```{r}
+aic_path <- "images/my_summary_aic.jpg"
+knitr::include_graphics(path = aic_path)
+```
+
+The Akaike Information Criterion is useful for "apple to apple" comparison, meaning comparing models based on the same data (the lower AIC suggests the better model). The number on its own is not very useful. Note: The AIC is basically the residual deviance adjusted for the number of parameteres in the model. 
 
 ## Questions
 
