@@ -236,6 +236,21 @@ knitr::include_graphics(path = aic_path)
 
 The Akaike Information Criterion is useful for "apple to apple" comparison, meaning comparing models based on the same data (the lower AIC suggests the better model). The number on its own is not very useful. Note: The AIC is basically the residual deviance adjusted for the number of parameteres in the model. 
 
+
+### So what does my output mean AGAIN? 
+
+In our hypothetical scenario for which we used the summary, we tried to predict survival (lives/dies) based on the continuous predictor of body size. The graph shows the probability of surviving versus body size, with the logistic regression curve fitted to the data. 
+
+```{r}
+coeffs_path <- "images/coefficients.jpg"
+knitr::include_graphics(path = coeffs_path)
+
+graph_path <- "images/surv_bodysize_vis.jpg"
+knitr::include_graphics(path = graph_path)
+```
+
+The output indicates that body size is significantly associated with the probability of surviving. The output also provides the coefficients Intercept (0.7743) and bodyweight (7.2639). These coefficients are entered in the logistic regression equation to estimate the odds (equivalently, probability) of surviving. One additional unit of body size is estimated to increase log-odds of surviving by 7.2639. 
+
 ## Questions
 
 Now head over to the quiz to see how you're doing understanding logistic regression!

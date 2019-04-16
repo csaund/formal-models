@@ -202,6 +202,15 @@ When building the model, try plugging in a <code>y</code> (outcome) variable tha
 <p><img src="images/my_summary_aic.jpg" width="442" /></p>
 <p>The Akaike Information Criterion is useful for “apple to apple” comparison, meaning comparing models based on the same data (the lower AIC suggests the better model). The number on its own is not very useful. Note: The AIC is basically the residual deviance adjusted for the number of parameteres in the model.</p>
 </div>
+<div id="section-so-what-does-my-output-mean-again" class="section level3">
+<h3>So what does my output mean AGAIN?</h3>
+<p>In our hypothetical scenario for which we used the summary, we tried to predict survival (lives/dies) based on the continuous predictor of bodyweight. The graph shows the probability of surviving versus bodyweight, with the logistic regression curve fitted to the data.</p>
+<p><img src="images/coefficients.jpg" width="354" /><img src="images/surv_bodysize_vis.jpg" width="729" /></p>
+<p>The graph shows the probability of passing the exam versus the number of hours studying, with the logistic regression curve fitted to the data.</p>
+<p>The output indicates that hours studying is significantly associated with the probability of passing the exam ( {p=0.0167} {p=0.0167}, Wald test). The output also provides the coefficients for {=-4.0777} {=-4.0777} and {=1.5046} {=1.5046}. These coefficients are entered in the logistic regression equation to estimate the odds (equivalently, probability) of passing the exam:</p>
+<p>One additional hour of study is estimated to increase log-odds of passing by 1.5046, so multiplying odds of passing by {(1.5046)4.5.} {(1.5046)4.5.} The form with the x-intercept (2.71) shows that this estimates even odds (log-odds 0, odds 1, probability 1/2) for a student who studies 2.71 hours.</p>
+<p>For example, for a student who studies 2 hours, entering the value {=2} {=2} in the equation gives the estimated probability of passing the exam of 0.26:</p>
+</div>
 </div>
 <div id="section-questions" class="section level2">
 <h2>Questions</h2>
