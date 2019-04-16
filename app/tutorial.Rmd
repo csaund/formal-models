@@ -25,20 +25,37 @@ https://www.machinelearningplus.com/machine-learning/complete-introduction-linea
 
 ### Coding in R
 
-## glm output interpretation 
+## Interpretation of the output
 
 Using the `summary()` function you viewed the details of the logistic regression model. Now how to interpret what you see?
 
+```{r}
 sum_path <- "images/my_summary.JPG"
-sum <- readJPEG(sum_path)
-dim(sum)
-![glm summary](images/my_summary.JPG)
+knitr::include_graphics(path = sum_path)
+
+## ![glm summary](images/my_summary.JPG)  would have to change size extra
+```
+
+
 
 ### Call
-The first line of the summary is simply showing you the original call to the `glm()` function 
 
-### deviance residuals
-The next bit gives you a summary of the deviance residuals. For the purpose of this tutorial we won't go into details about how these are calculated. In the logistic regression the deviance residuals are not as useful. However, you should look out for properties similar to regular residuals. That is ideally they should be centered closely to 0 and roughly symmetrical. 
+```{r}
+call_path <- "images/my_summary_call.jpg"
+knitr::include_graphics(path = call_path)
+
+```
+
+The first line of the summary is simply showing you the original call to the `glm()` function.
+
+### Deviance residuals
+```{r}
+devres_path <- "images/my_summary_devres.jpg"
+knitr::include_graphics(path = devres_path)
+
+```
+
+The next bit gives you a summary of the deviance residuals. In logistic regression the deviance residuals are not as useful and for the purpose of this tutorial we won't go into detail about how to calculate them. However, you should look out for properties similar to regular residuals. That is, ideally they should be centered closely to 0 and roughly symmetrical. 
 
 ## R Exercises: Plotting
 
