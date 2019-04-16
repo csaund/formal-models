@@ -77,7 +77,7 @@ assumptions <- "These are some assumptions we have when using logistic regressio
   assumes linear relationship
   normally distributed"
 
-how_to_use <- "Use to explain relationship between binary DV and one or more nominal IVs"
+how_to_use <- "Go to our tutorial"
 
 intro_text <- "Willkommen, bienvenue, welcome to our app. In this diminutive digital diorama we hope to explain and explore Logistic Regression and use this method as a case study in the principles, perks and perils of data modelling. "
 
@@ -151,7 +151,7 @@ ui <- tagList(
                       p(logistic_why_2)
              ),
              tabPanel("How",
-                      h3("could I ever stop?"),
+                      h3("How do I implement a Logistic Regression Model?"),
                       p(how_to_use)
              )
              #widths=c(4, 6)   TODO fix this
@@ -162,12 +162,12 @@ ui <- tagList(
              # and this is where the output actually ends up. I think leaving it 
              # as its own proper tab is the way.
              htmlOutput("tutorial")
+    ),
+    tabPanel("Quiz",
+           mainPanel(
+             "Hello I hear you'd like to learn some R",
+             R_quiz
+           )
     )
-#    tabPanel("Quiz",
-#           mainPanel(
-#             "Hello I hear you'd like to learn some R",
-#             R_quiz
-#           )
-#    )
   )
 )

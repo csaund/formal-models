@@ -1,0 +1,13 @@
+name: tutorial
+title:
+username:
+account: ug-formal-models-2019
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 868483
+bundleId: 2015310
+url: https://ug-formal-models-2019.shinyapps.io/tutorial/
+when: 1555412310.56829
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: carolyn-playing-around

@@ -1,0 +1,10 @@
+name: tutorial
+title:
+username:
+account: ug-formal-models-2019
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 868483
+bundleId: 2015305
+url: https://ug-formal-models-2019.shinyapps.io/tutorial/
+when: 1555412209.67092

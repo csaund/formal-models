@@ -1,6 +1,6 @@
 ---
-title: "Tutorial"
-author: "FM 2019 Team"
+title: "Logistic Regression Tutorial"
+author: "Carolyn Saund"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -213,25 +213,5 @@ Notice the difference between this predictive line and the line fitting the data
 
 ## Questions
 
-The Basics
-```{r x-pred, echo=FALSE}
-question("In a simple linear regression, the X is the... ",
-  answer("predictor", correct = TRUE),
-  answer("dependent variable")
-)
-```
-
-```{r y-dv, echo=FALSE}
-question("In a simple linear regression, the Y is the... ",
-  answer("predictor"),
-  answer("dependent variable", correct = TRUE)
-)
-```
-
-```{r xy-cont, echo=FALSE}
-question("To calculate a simple linear regression, both X and Y need to be (typically)... ",
-  answer("categorical/factor"),
-  answer("numeric/continuous", correct = TRUE)
-)
-```
+Now head over to the quiz to see how you're doing understanding logistic regression!
 
