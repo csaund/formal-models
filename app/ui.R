@@ -120,7 +120,7 @@ ui <- tagList(
            navlistPanel(
              "",
              tabPanel("Why Use Logistic Regression",
-                      h2("Logistic Regression"),
+                      h2("Binary Logistic Regression"),
                       p(logistic_box_office),
                       fluidRow(
                         column(6,
@@ -132,7 +132,11 @@ ui <- tagList(
                       ),
                       plotOutput("logisticPlot"),
                       p("remember our raw data from before:"),
-                      plotOutput("logisticRaw")
+                      plotOutput("logisticRaw"),
+                      h2("Multiple Logistic Regression"),
+                      p("Although in the previous examples we have used just one predictor variable,  we can use multiple predictors and they can be a mixture of continuous and categorical. The graph below shows the influence on the probability of winning that 3 different factors have. "),
+                      HTML('<img src="adamsandler.png" height="400"</img>'),
+                      p("It should be noted that in this graph, we have normalized Budget, Score, and number of Adam Sandlers to fall between -3 and 3.")
              ),
              tabPanel("When Is This Appropriate?",
                       h2("Assumptions in Binary Logistic Regression"),
@@ -151,11 +155,9 @@ ui <- tagList(
                         tags$li("Little to no multicollinearity among the predictor variables. "),
                         tags$li("A linear relationship between the predictor variables and the log odds."),
                         tags$li("A reasonable sample size especially when one outcome is a lot less likely than the other.")
-                      ),
-                      p("Fourth, logistic regression assumes linearity of independent variables and log odds.  although this analysis does not require the dependent and independent variables to be related linearly, it requires that the independent variables are linearly related to the log odds."),
-                      p("Finally, logistic regression typically requires a large sample size.  A general guideline is that you need at minimum of 10 cases with the least frequent outcome for each independent variable in your model. For example, if you have 5 independent variables and the expected probability of your least frequent outcome is .10, then you would need a minimum sample size of 500 (10*5 / .10).")
+                      )
              ),
-             tabPanel("Additional Uses",
+             tabPanel("Uses",
                       h2("Why Use This Technique?"),
                       p(inf_pred_intro),
                       p(inference),

@@ -3,6 +3,7 @@ library(dplyr)
 library(RSQLite)
 library(dbplyr)
 library(ggplot2)
+library(tidyverse)
 
 server = function(input, output) {
   
