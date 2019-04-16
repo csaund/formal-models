@@ -129,6 +129,15 @@ knitr::include_graphics(path = devres_path)
 
 The next bit gives you a summary of the deviance residuals. In logistic regression the deviance residuals are not as useful and for the purpose of this tutorial we won't go into detail about how to calculate them. However, you should look out for properties similar to regular residuals. That is, ideally they should be centered closely to 0 and roughly symmetrical. 
 
+### Coefficients
+```{r}
+coef_path <- "images/my_summary_coef.jpg"
+knitr::include_graphics(path = coef_path)
+
+```
+
+In this section we can see the coefficient estimates (coefficients or our "betas" in the model if you'd imagine the equation), including the intercept, the standard errors of the coeffiecients, z-values (which are basically values of the estimates divided by the standard errors), and lastly p-values telling us how statistically significant each of your predictors is (in our case our one predictor is significant). 
+
 ## R Exercises: Plotting
 
 *Here's a few exercises to get you started coding up a linear regression.*
