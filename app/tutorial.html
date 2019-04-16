@@ -66,6 +66,11 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <p><img src="images/my_summary_devres.jpg" width="442" /></p>
 <p>The next bit gives you a summary of the deviance residuals. In logistic regression the deviance residuals are not as useful and for the purpose of this tutorial we won’t go into detail about how to calculate them. However, you should look out for properties similar to regular residuals. That is, ideally they should be centered closely to 0 and roughly symmetrical.</p>
 </div>
+<div id="section-coefficients" class="section level3">
+<h3>Coefficients</h3>
+<p><img src="images/my_summary_coef.jpg" width="442" /></p>
+<p>In this section we can see the coefficient estimates (coefficients or our “betas” in the model if you’d imagine the equation), including the intercept, the standard errors of the coeffiecients, z-values (which are basically values of the estimates divided by the standard errors), and lastly p-values telling us how statistically significant each of your predictors is.</p>
+</div>
 </div>
 <div id="section-r-exercises-plotting" class="section level2">
 <h2>R Exercises: Plotting</h2>
@@ -136,32 +141,32 @@ You can calculate this correlation:
 <div id="section-questions" class="section level2">
 <h2>Questions</h2>
 <p>The Basics 
-<div id="htmlwidget-4aeb8da4c022e61db426" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-cf1736dc11b9ecf1ebc8" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-4aeb8da4c022e61db426">{"x":{"question":"In a simple linear regression, the X is the... ","answers":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"label":"x-pred","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the X is the... ","a":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script></p>
+<script type="application/json" data-for="htmlwidget-cf1736dc11b9ecf1ebc8">{"x":{"question":"In a simple linear regression, the X is the... ","answers":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"label":"x-pred","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the X is the... ","a":[{"option":"predictor","correct":true,"message":null},{"option":"dependent variable","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script></p>
 
-<div id="htmlwidget-ff39b5463e8255697761" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-9a28c7583dd8c83783a8" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-ff39b5463e8255697761">{"x":{"question":"In a simple linear regression, the Y is the... ","answers":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"label":"y-dv","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the Y is the... ","a":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-9a28c7583dd8c83783a8">{"x":{"question":"In a simple linear regression, the Y is the... ","answers":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"label":"y-dv","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"In a simple linear regression, the Y is the... ","a":[{"option":"predictor","correct":false,"message":null},{"option":"dependent variable","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
 
-<div id="htmlwidget-1bc7a79f92a39cc0134f" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-a69e6c3e17acb6e73071" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-1bc7a79f92a39cc0134f">{"x":{"question":"To calculate a simple linear regression, both X and Y need to be (typically)... ","answers":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"label":"xy-cont","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"To calculate a simple linear regression, both X and Y need to be (typically)... ","a":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-a69e6c3e17acb6e73071">{"x":{"question":"To calculate a simple linear regression, both X and Y need to be (typically)... ","answers":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"label":"xy-cont","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"To calculate a simple linear regression, both X and Y need to be (typically)... ","a":[{"option":"categorical/factor","correct":false,"message":null},{"option":"numeric/continuous","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
 
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
