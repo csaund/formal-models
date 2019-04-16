@@ -6,24 +6,8 @@ library(ggplot2)
 library(tidyverse)
 
 server = function(input, output) {
-  
-    complement <- function(y, rho, x) {
-      if (missing(x)) x <- rnorm(length(y)) # Optional: supply a default if `x` is not given
-      y.perp <- residuals(lm(x ~ y))
-      rho * sd(y.perp) * y + y.perp * sd(y) * sqrt(1 - rho^2)
-    }
     
-    scale_values <- function(data, tmin, tmax) {
-      rmin <- min(data)
-      rmax <- max(data)
-      scaled <- ((data - rmin) / (rmax - rmin)) * (tmax - tmin) + tmin
-      return(scaled)
-    }
-    
-    # TODO this is where our tutorial app will be!!
-    # It needs to be published in the shiny app site so I will work on that. 
-    # Note: It only renders in-browser so just running the app locally will
-    # not have it show up!
+    # Fetch our tutorial app from where it's published as a separate shiny app
     output$tutorial <- renderUI({
       tags$iframe(
         src="https://ug-formal-models-2019.shinyapps.io/logistic-regression-code-tutorial/", width=1280, height=720
@@ -31,8 +15,8 @@ server = function(input, output) {
     })
 
     # n is number of observations     
-    # c's are parameters
-    # Since we're simulating our data we get to decide what we find. 
+    # c is correlation coefficient
+    # Since we're simulating our data we get to decide what we find, 
     # We're going to decide how much these variable increase or decease the odds of our 
     # outcome. There will be roughly approxomite to the coefficent estimate we get out of 
     # our model (although not exact since we're radomly sampling from a normal distribution).
@@ -49,6 +33,7 @@ server = function(input, output) {
       return(df)
     }
     
+    # Generate the raw data plot for the home page
     output$rawPlot <- renderPlot({
       mydf = generate_logistic_data(100, 3) 
       mydf$y1 <- as.character(mydf$y)
@@ -57,12 +42,14 @@ server = function(input, output) {
       
       ggplot(data = mydf, aes(x1, y)) +
         geom_point(aes(color=Actual_Outcome, shape=Actual_Outcome, fill=Actual_Outcome), alpha=0.4, size=5) +
+        # Add a (fake) linear regression line for illustrative purposes
         geom_abline(intercept=1.4, slope=0.46) +
         ggtitle("Our Binary Data") +
         xlab("Predictor Variable") +
         ylab(" No Eels or Eels all over the shop")      
     })
     
+    # Actual raw data that depends on input
     output$logisticRaw <- renderPlot({
       mydf = generate_logistic_data(input$logistic_n, input$c1) 
       mydf$y1 <- as.character(mydf$y)
@@ -75,6 +62,7 @@ server = function(input, output) {
         ylab("Movies Which Won an Oscar")
     })
     
+    # Logistic plot for second page
     output$logisticPlot <- renderPlot({
       dat = generate_logistic_data(input$logistic_n, input$c1) 
       g <- glm( y~x1,family="binomial", data=dat)
@@ -92,36 +80,5 @@ server = function(input, output) {
         xlab("Predictor Variable") +
         ylab("Predicted Probability")
     })
-    
-    output$logisticLine <- renderPlot({
-      dat = generate_logistic_data(input$logistic_n, input$c1) 
-      ggplot(data = mydf, aes(x1, prob)) +
-        geom_point(aes(color = y), alpha = .15, shape = 4) +
-        geom_smooth(method = "glm", method.args = list(family = "binomial")) +
-        ggtitle("Logistic regression model fit") +
-        xlab("X1") +
-        ylab("Probability")
-    })
-    
-    generate_data <- function(num_samples, correlation) {
-      ages <- runif(num_samples, min=0, max=87)
-      vals <- 1:num_samples # Optional
-      y = as.vector(sapply(correlation, function(correlation) complement(ages, correlation, vals)))
-      # hard code y range to 0-40
-      litres_per_month = scale_values(y, 0, input$litre_range)
-      X <- data.frame(litres_per_month,
-                      correlation=ordered(rep(signif(correlation, 2))),
-                      ages=ages) 
-      return(X)
-    }
-    
-    
-    output$scatterPlot <- renderPlot({
-      d <- generate_data(input$num_samples, input$data_correlation)
-      ggplot(d, aes(ages,litres_per_month, group=correlation)) + 
-        geom_smooth(method="lm", color="Black") + 
-        geom_point(aes(fill=correlation), alpha=1/2) 
-    })
-    
 
   }
