@@ -25,6 +25,78 @@ https://www.machinelearningplus.com/machine-learning/complete-introduction-linea
 
 ### Coding in R
 
+## Logistic models in R
+Because logistic regression can be tricky to wrap your head around, it may seem 
+intimidating to try to model it in R. Luckily, R is designed with stats (and you!)
+in mind, and has many built-in tools for you to use to create logistic regression models.
+
+Although we used our "Oscars" dataset before, to keep things simple we'll be generating our own data here.
+
+### Generating data
+Modeling can be made much more understandable when we generate our own data for 
+the task. Through this, we understand how the shape of our data influences the 
+outcome of our model (and visualizations). Let's start by generating data here.
+
+Create a function that generates a probability dataframe. Your function could take 
+as input the number of observations, and the predictive power of X to predict Y. 
+Your dataframe should end with two columns named `x` and `y` where `x` is normally distributed between whatever values you like and `y` is binomially distributed between 0 and 1.
+
+Hint: Remember that to generate `y`, you will need to create a third variable that is
+a linear combination of `x` and `correlation`, and then take the inverse logit function
+Remember those functions are as follows:
+  z = 1 + correlation*x      # linear combination with a bias
+  pr = 1/(1+exp(-z))         # pass through an inv-logit function
+```{r gen-data, exercise = TRUE} 
+generate_data <- function(n, corr) {
+  df = ...
+  return(df)
+}
+```
+
+```{r gen-data-hint} 
+generate_data <- function(n, corr) {
+  # Generate normally distributed X
+  x = rnorm(n)           # some continuous variables 
+  # Since we're simulating our data we get to decide what we find. 
+  # We're going to decide how much these variable increase or decease the odds of our outcome. There will be roughly approxomite to the coefficent estimate we get out of our model (although not exact since we're radomly sampling from a normal distribution).
+  correlation=corr
+  
+  z = 1 + correlation*x      # linear combination with a bias
+  pr = 1/(1+exp(-z))         # pass through an inv-logit function
+  y = rbinom(n,1,pr)         # bernoulli response variable
+  df = data.frame(y=y,x=x)   #pop them all into a data frame
+}
+```
+
+
+Now that we have our data, running a linear model is easy. Use the `glm()` function to
+create a logistic regression model of `y` from `x`.
+```{r glm, exercise = TRUE}
+model <- glm(...)
+```
+
+```{r glm-hint}
+# if you need a hint, type ?glm in the console
+model <- glm(..., family="binomial")
+```
+
+
+You can easily view the output of the model using the `summary()` function. Try it below:
+```{r view-summary, exercise=TRUE}
+summary(...)
+```
+
+```{r view-summary-hint}
+summary(model)
+```
+
+
+
+When building the model, try plugging in a `y` (outcome) variable that contains values outside of 0-1. Notice the error that R outputs.
+```{r binomial-error, exercise=TRUE}
+model <- glm(speed ~ dist, family="binomial", data=cars)
+```
+
 ## Interpretation of the output
 
 Using the `summary()` function you viewed the details of the logistic regression model. Now how to interpret what you see?
@@ -165,6 +237,5 @@ question("To calculate a simple linear regression, both X and Y need to be (typi
   answer("categorical/factor"),
   answer("numeric/continuous", correct = TRUE)
 )
-
 ```
 

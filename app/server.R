@@ -49,8 +49,27 @@ server = function(input, output) {
     }
     
     output$rawPlot <- renderPlot({
-      dat = generate_logistic_data(input$logistic_n, input$c1) 
-      plot(dat$x1, dat$y)
+      mydf = generate_logistic_data(input$logistic_n, input$c1) 
+      mydf$y1 <- as.character(mydf$y)
+      mydf$y <- as.character(mydf$y)
+      mydf$Actual_Outcome<- ifelse(mydf$y==0,"Eels","No Eels")
+      ggplot(data = mydf, aes(x1, y)) +
+        geom_point(aes(color=Actual_Outcome, shape=Actual_Outcome, fill=Actual_Outcome), alpha=0.4, size=5) +
+        ggtitle("Our Binary Data") +
+        xlab("Predictor Variable") +
+        ylab(" No Eels or Eels all over the shop")      
+    })
+    
+    output$logisticRaw <- renderPlot({
+      mydf = generate_logistic_data(input$logistic_n, input$c1) 
+      mydf$y1 <- as.character(mydf$y)
+      mydf$y <- as.character(mydf$y)
+      mydf$Actual_Outcome<- ifelse(mydf$y==0,"Eels","No Eels")
+      ggplot(data = mydf, aes(x1, y)) +
+        geom_point(aes(color=Actual_Outcome, shape=Actual_Outcome, fill=Actual_Outcome), alpha=0.4, size=5) +
+        ggtitle("Our Binary Data") +
+        xlab("Predictor Variable") +
+        ylab(" No Eels or Eels all over the shop")
     })
     
     output$logisticPlot <- renderPlot({
