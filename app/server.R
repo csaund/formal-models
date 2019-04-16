@@ -25,7 +25,7 @@ server = function(input, output) {
     # not have it show up!
     output$tutorial <- renderUI({
       tags$iframe(
-        src="https://jjallaire.shinyapps.io/learnr-tutorial-03a-data-manip-filter/", width=1280, height=720
+        src="https://ug-formal-models-2019.shinyapps.io/logistic-regression-code-tutorial/", width=1280, height=720
       )
     })
 

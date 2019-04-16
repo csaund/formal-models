@@ -1,0 +1,12 @@
+name: logistic-regression-code-tutorial
+title: logistic-regression-code-tutorial
+username:
+account: ug-formal-models-2019
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 868489
+bundleId: 2015331
+url: https://ug-formal-models-2019.shinyapps.io/logistic-regression-code-tutorial/
+when: 1555412757.72588
+asMultiple: FALSE
+asStatic: FALSE
