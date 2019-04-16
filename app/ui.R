@@ -6,28 +6,6 @@ library(jtools)
 library(learnr)
 library(xml2)
 
-## TODO
-# 1. Take out all stuff about linear regression
-# 2. Put in logistic regression visualization from
-# https://statquest.org/2018/07/23/statquest-logistic-regression-in-r/#code
-#   visualize color as actual outcome
-#   explain how line relates to prediction
-#   Kat to code model
-# 3. Sarah to find scatterplotty logistic regression
-# 3.5 Tree write up plain text description of glm output
-# 4. Carolyn nicely format all of Sarah's text/plug in Kat's visualization
-# 5. R Code Tutorials by Sarah for logistic regression (content only)
-# 6. Reflect Oscar's theme
-
-
-# For dropdown menu
-actionLink <- function(inputId, ...) {
-  tags$a(href='javascript:void',
-         id=inputId,
-         class='action-button',
-         ...)
-}
-
 R_quiz <- quiz(
   question("In a logistic regression the predictor variables can be ",
            answer("categorical"),
@@ -51,19 +29,6 @@ R_quiz <- quiz(
   )
 )
 
-# tag("a", list(href = "tutorial.Rmd", "R Quiz"))
-# include an external link like this ^^
-
-# https://www.google.com/search?q=how+to+use+logistic+regression&rlz=1C5CHFA_enUS747US750&oq=how+to+use+logistic+regression&aqs=chrome..69i57j0l5.4992j0j1&sourceid=chrome&ie=UTF-8
-# also good resource
-
-introductory_text <- "Take our example scenario and generate some data with it"
-
-assumptions <- "These are some assumptions we have when using logistic regression: 
-  we assume observations are independent
-  assumes linear relationship
-  normally distributed"
-
 how_to_use <- "In the next section we will demonstrate coding Logistic Regression in R. In it you will learn how to:"
 
 intro_text <- "Willkommen, bienvenue, welcome to our app. In this diminutive digital diorama we hope to explain and explore Logistic Regression and use this method as a case study in the principles, perks and perils of data modelling. "
@@ -83,12 +48,10 @@ logistic_intro_3 <- "The graph below shows the values of a single predictor vari
 
 logistic_box_office <- "Within the context of our dataset we want our model to accurately predict if a nominated film falls into the Won or Lost categories. Let’s begin by imagining we have no predictors. If this were a linear regression, with a continuous outcome like Box Office profit, then our best guess would be the mean (which would for the intercept in a linear model). However, when our outcome is binary (0 or 1) then taking a mean (0.5) is useless because in the context of categorical ratings 0.5 doesn’t mean anything…. unless you’re LaLa Land. Instead the base prediction for logistic regression could be derived from the number of cases. The number of nominees for Best Picture changes periodically but for 2019 there were 8 contestants of whom only 1 wins. So for a logistic regression a more informative intercept might be that a film has a baseline 1 in 8 chance of winning.  However, this alone is neither very informative or very interesting, imagine betting on a race where all the horses have 1/8 odds. This is where our predictors come in. We want to use our data to build a model which expresses the relationship between our predictors and the films chance of winning." 
 
-
 inf_pred_intro <- "Regression models serve two main purposes Inference and Prediction."
 inference <- "Inference is the processes of evaluating the contribution of predictors to our outcomes. This allows us to ask questions like does budget matter? Do critic or audience scores matter more? Am I better of spending my money on CG moustache removal or bribing internet commentators?"
 pred <- "Prediction is when we use our model to predict an outcome based on specific values of our predictor variables. This allows us to ask questions like, based on the IMBD and Rotten Tomatoes scores which film should I put my money on for the 2020 Best Pic? Or I spent this much removing moustaches and have bribed the internet to be this nice, what are my chances of winning?"
   
-
 
 ui <- tagList(
   fluidPage(theme = shinytheme("cosmo")),
@@ -120,7 +83,7 @@ ui <- tagList(
            navlistPanel(
              "",
              tabPanel("Why Use Logistic Regression",
-                      h2("Logistic Regression"),
+                      h2("Binary Logistic Regression"),
                       p(logistic_box_office),
                       fluidRow(
                         column(6,
@@ -132,7 +95,11 @@ ui <- tagList(
                       ),
                       plotOutput("logisticPlot"),
                       p("remember our raw data from before:"),
-                      plotOutput("logisticRaw")
+                      plotOutput("logisticRaw"),
+                      h2("Multiple Logistic Regression"),
+                      p("Although in the previous examples we have used just one predictor variable,  we can use multiple predictors and they can be a mixture of continuous and categorical. The graph below shows the influence on the probability of winning that 3 different factors have. "),
+                      HTML('<img src="adamsandler.png" height="400"</img>'),
+                      p("It should be noted that in this graph, we have normalized Budget, Score, and number of Adam Sandlers to fall between -3 and 3.")
              ),
              tabPanel("When Is This Appropriate?",
                       h2("Assumptions in Binary Logistic Regression"),
@@ -151,11 +118,9 @@ ui <- tagList(
                         tags$li("Little to no multicollinearity among the predictor variables. "),
                         tags$li("A linear relationship between the predictor variables and the log odds."),
                         tags$li("A reasonable sample size especially when one outcome is a lot less likely than the other.")
-                      ),
-                      p("Fourth, logistic regression assumes linearity of independent variables and log odds.  although this analysis does not require the dependent and independent variables to be related linearly, it requires that the independent variables are linearly related to the log odds."),
-                      p("Finally, logistic regression typically requires a large sample size.  A general guideline is that you need at minimum of 10 cases with the least frequent outcome for each independent variable in your model. For example, if you have 5 independent variables and the expected probability of your least frequent outcome is .10, then you would need a minimum sample size of 500 (10*5 / .10).")
+                      )
              ),
-             tabPanel("Additional Uses",
+             tabPanel("Uses",
                       h2("Why Use This Technique?"),
                       p(inf_pred_intro),
                       p(inference),
@@ -176,8 +141,6 @@ ui <- tagList(
        )
     ),
     tabPanel("R Code Tutorials",
-             # and this is where the output actually ends up. I think leaving it 
-             # as its own proper tab is the way.
              htmlOutput("tutorial")
     ),
     tabPanel("Quiz",
