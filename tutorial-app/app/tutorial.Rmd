@@ -92,18 +92,6 @@ library(jpeg)
 sum_path <- "images/my_summary.JPG"
 knitr::include_graphics(path = sum_path)
 
-fit <-glm(y ~ x1+x2+x3,
- # we include our outcome variabes and all the predictor variables :
- data = df,
- # we specify what data we're using:
- family = "binomial")
- # we specify that we want a logistic rather than linear model:
- 
-#lets look at our results
-summary(fit)
-
-
-## ![glm summary](images/my_summary.JPG)  would have to change size extra
 ```
 
 
@@ -139,6 +127,64 @@ In this section we can see the coefficient estimates (coefficients - or our "bet
 This refers to the change in log odds per one unit increase of the variable. The effect on probability can be caluculated from log odds. Using the inverse logit function P=exp(logit)/1+exp(logit) we can calculate the probability of our outcome like this.
 
 
+### Dispersion parameter
+```{r}
+disp_path <- "images/my_summary_disp.jpg"
+knitr::include_graphics(path = disp_path)
+```
+
+_You will probably ignore this_ Unlike in linear regression where we estimate both mean and variance, in logistic regression we estimate the mean of the data and the variance is derived from the mean. There is then a chance that the variance could be underestimated. If that's the case, it can be changed from the default in `summary()`.
+
+### Null and residual deviance
+```{r}
+devi_path <- "images/my_summary_devi.jpg"
+knitr::include_graphics(path = devi_path)
+```
+
+_You will probably ignore this_ These can be used to compare models, calculate R^2 and the oeverall p-value. 
+
+### AIC score
+```{r}
+aic_path <- "images/my_summary_aic.jpg"
+knitr::include_graphics(path = aic_path)
+```
+
+The Akaike Information Criterion is useful for "apple to apple" comparison, meaning comparing models based on the same data (the lower AIC suggests the better model). The number on its own is not very useful. Note: The AIC is basically the residual deviance adjusted for the number of parameteres in the model. 
+
+### So what does my model say AGAIN?
+
+```{r eval=FALSE, include=FALSE}
+df <- generate_data(100, 5)
+fit <- glm(y ~ x,    # we include our outcome variabes and all the predictor variables :
+ data = df,         # we specify what data we're using:
+ family = "binomial")# we specify that we want a logistic rather than linear model:
+ 
+#lets look at our results
+summary(fit)
+
+ggplot(df, aes(x= x, y=y)) + geom_point() +   stat_smooth(method="glm", method.args=list(family="binomial"), se=FALSE)
+ggsave("genplot.jpeg")
+
+```
+
+The graph shows the probability of y (e.g. ice breaking/not breaking) based on x (e.g. temperature), with the logistic regression curve fitted to the data. As you can see, the y axis only spans from 0 (ice not breaking) to 1 (ice breaking). 
+
+```{r}
+gensum_path <- "images/gensum.JPG"
+knitr::include_graphics(path = gensum_path)
+genplot_path <- "images/genplot.jpeg"
+knitr::include_graphics(path = genplot_path, dpi = 600)
+```
+
+Our output indicates that temperature is significantly (***) associated with the probability of the ice breaking. It also gives us the Intercept = 0.6508 and x = 4.4483. So one additional unit of x (temperature) is estimated to increase log-odds of y (ice breaking) by 4.4483.
+
+```{r}
+extra_path <- "images/genplot_extra.jpg"
+knitr::include_graphics(path = extra_path)
+```
+
+
+If we were to use our model to predict ice behaviour for some hypothetical temperatures, we would see that: In the instance of a temperature way over zero, the corresponding point on our regression line suggests that there is a probability very close to 1 that the ice will break. With a temperature just above zero the probability is lower but still pretty close to 1. And with a temperature below zero the probability is very close to 0 and the ice is unlikely to break. 
 
 ## Linear Regression: Review
 
@@ -223,45 +269,6 @@ plot(x, y, abline(mod))
 ```
 
 Notice the difference between this predictive line and the line fitting the data (using `scatter.smooth`).
-
-### Dispersion parameter
-```{r}
-disp_path <- "images/my_summary_disp.jpg"
-knitr::include_graphics(path = disp_path)
-```
-
-_You will probably ignore this_ Unlike in linear regression where we estimate both mean and variance, in logistic regression we estimate the mean of the data and the variance is derived from the mean. There is then a chance that the variance could be underestimated. If that's the case, it can be changed from the default in `summary()`.
-
-### Null and residual deviance
-```{r}
-devi_path <- "images/my_summary_devi.jpg"
-knitr::include_graphics(path = devi_path)
-```
-
-_You will probably ignore this_ These can be used to compare models, calculate R^2 and the oeverall p-value. 
-
-### AIC score
-```{r}
-aic_path <- "images/my_summary_aic.jpg"
-knitr::include_graphics(path = aic_path)
-```
-
-The Akaike Information Criterion is useful for "apple to apple" comparison, meaning comparing models based on the same data (the lower AIC suggests the better model). The number on its own is not very useful. Note: The AIC is basically the residual deviance adjusted for the number of parameteres in the model. 
-
-
-### So what does my output mean AGAIN? 
-
-In our hypothetical scenario for which we used the summary, we tried to predict survival (lives/dies) based on the continuous predictor of body size. The graph shows the probability of surviving versus body size, with the logistic regression curve fitted to the data. 
-
-```{r}
-coeffs_path <- "images/coefficients.jpg"
-knitr::include_graphics(path = coeffs_path)
-
-graph_path <- "images/surv_bodysize_vis.jpg"
-knitr::include_graphics(path = graph_path)
-```
-
-The output indicates that body size is significantly associated with the probability of surviving. The output also provides the coefficients Intercept (0.7743) and bodyweight (7.2639). These coefficients are entered in the logistic regression equation to estimate the odds (equivalently, probability) of surviving. One additional unit of body size is estimated to increase log-odds of surviving by 7.2639. 
 
 ## Questions
 
