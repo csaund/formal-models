@@ -29,38 +29,25 @@ actionLink <- function(inputId, ...) {
 }
 
 R_quiz <- quiz(
-  question("When is regression analysis *inappropriate*?",
-           answer("you have two variables that are measured on an interval or ratio scale"),
-           answer("you are trying to predict one variable from another"),
-           answer("when plotted, your data forms a reasonably straight line"),
-           answer("when plotted, your data is heteroscedastic", correct = TRUE)
+  question("In a logistic regression the predictor variables can be ",
+           answer("categorical"),
+           answer("continuous"),
+           answer("both", correct=TRUE)
   ),
-  question("A regression line...",
-           answer("passes through as many points as possible", correct = TRUE),
-           answer("minimizes squared distance from the points", correct = TRUE),
-           answer("goes through the average of each data point at a particular x value"),
-           answer("is used to classify new data")
+  question("If you want to find out how much a single factor influence the probability of an outcome which output parameter would be most informative?",
+           answer("Intercept coefficent"),
+           answer("Variable coefficent", correct = TRUE),
+           answer("AIC value")
   ),
-  question("As the correlation coefficient (r) gets larger, our prediction for Y (the dependent variable)...",
-           answer("gets smaller"),
-           answer("does not change"),
-           answer("gets closer to the mean of Y"),
-           answer("gets closer to the mean of X", correct = TRUE)
+  question("The inital output coefficents from a logistic regression represent ",
+           answer("probability"),
+           answer("logg odds", correct = TRUE),
+           answer("odds ratio")
   ),
-  # this should be a proper question where we give a regression equation and ask them to 
-  # predict Y
-  question("Which equation correctly describes the regression line for Y in relation to X?",
-           answer(sprintf("$\\sqrt{x} = %d$",  1)),
-           answer(sprintf("$x ^ 2 = %d$", 2))
-  ),
-  question("What does 'MSE' mean?...",
-           answer("placeholder"),
-           answer("placeholder2", correct = TRUE)
-  ),
-  ## we can embed images here too
-  question("What do you think this is a picture of?",
-           answer("god only knows", correct=TRUE),
-           answer("why would you choose a random image from your downloads for this?")
+  question("In a logistic regression the outcome variable can be ",
+           answer("categorical", correct= TRUE),
+           answer("continuous"),
+           answer("both")
   )
 )
 
@@ -77,14 +64,14 @@ assumptions <- "These are some assumptions we have when using logistic regressio
   assumes linear relationship
   normally distributed"
 
-how_to_use <- "Go to our tutorial"
+how_to_use <- "In the next section we will demonstrate coding Logistic Regression in R. In it you will learn how to:"
 
 intro_text <- "Willkommen, bienvenue, welcome to our app. In this diminutive digital diorama we hope to explain and explore Logistic Regression and use this method as a case study in the principles, perks and perils of data modelling. "
 
 intro_two <- "Logistic regression is a statistical method that allows us to make sense 
               of binary data. That is, data that looks somewhat like this:"
 
-intro_three <- "As this plot shows, linear regression is not helpful for us here, 
+intro_three <- "As this plot shows, linear correlation is not helpful for us here, 
                 as we are not correlating our two classes of outcomes. Instead, we 
                 want to use logistic regression to make inferences about new 
                 data points and test the predictive power of our probabalistic 
@@ -94,9 +81,14 @@ logistic_intro_1 <- "For the purposes of this explanation we are going to, perha
 logistic_intro_2 <- "In logistic regression we examine the relationship between our predictor variables and the probability that an answer will be yes rather than no, right rather than wrong, covered in eels rather than not being covered in eels." 
 logistic_intro_3 <- "The graph below shows the values of a single predictor variable plotted against the outcome of eels or no eels."
 
-logistic_when_3 <- "Within the context of our dataset we want our model to accurately predict if a nominated film falls into the Won or Lost categories. Let’s begin by imagining we have no predictors. If this were a linear regression, with a continuous outcome like Box Office profit, then our best guess would be the mean (which would for the intercept in a linear model). However, when our outcome is binary (0 or 1) then taking a mean (0.5) is useless because in the context of categorical ratings 0.5 doesn’t mean anything…. unless you’re LaLa Land. Instead the base prediction for logistic regression could be derived from the number of cases. The number of nominees for Best Picture changes periodically but for 2019 there were 8 contestants of whom only 1 wins. So for a logistic regression a more informative intercept might be that a film has a baseline 1 in 8 chance of winning.  However, this alone is neither very informative or very interesting, imagine betting on a race where all the horses have 1/8 odds. This is where our predictors come in. We want to use our data to build a model which expresses the relationship between our predictors and the films chance of winning." 
-logistic_why_1 <- "Regression models serve two main purposes Inference and Prediction."
-logistic_why_2 <- "Inference is the processes of evaluating the contribution of predictors to our outcomes. This allows us to ask questions like does budget matter? Do critic or audience scores matter more? Am I better of spending my money on CG moustache removal or bribing internet commentators? "
+logistic_box_office <- "Within the context of our dataset we want our model to accurately predict if a nominated film falls into the Won or Lost categories. Let’s begin by imagining we have no predictors. If this were a linear regression, with a continuous outcome like Box Office profit, then our best guess would be the mean (which would for the intercept in a linear model). However, when our outcome is binary (0 or 1) then taking a mean (0.5) is useless because in the context of categorical ratings 0.5 doesn’t mean anything…. unless you’re LaLa Land. Instead the base prediction for logistic regression could be derived from the number of cases. The number of nominees for Best Picture changes periodically but for 2019 there were 8 contestants of whom only 1 wins. So for a logistic regression a more informative intercept might be that a film has a baseline 1 in 8 chance of winning.  However, this alone is neither very informative or very interesting, imagine betting on a race where all the horses have 1/8 odds. This is where our predictors come in. We want to use our data to build a model which expresses the relationship between our predictors and the films chance of winning." 
+
+
+inf_pred_intro <- "Regression models serve two main purposes Inference and Prediction."
+inference <- "Inference is the processes of evaluating the contribution of predictors to our outcomes. This allows us to ask questions like does budget matter? Do critic or audience scores matter more? Am I better of spending my money on CG moustache removal or bribing internet commentators?"
+pred <- "Prediction is when we use our model to predict an outcome based on specific values of our predictor variables. This allows us to ask questions like, based on the IMBD and Rotten Tomatoes scores which film should I put my money on for the 2020 Best Pic? Or I spent this much removing moustaches and have bribed the internet to be this nice, what are my chances of winning?"
+  
+
 
 ui <- tagList(
   fluidPage(theme = shinytheme("cosmo")),
@@ -123,11 +115,13 @@ ui <- tagList(
              )
     ),
     # The Second Tab
-    tabPanel("Using Logistic Regression",
+    tabPanel("Learn About Logistic Regression",
          mainPanel(
            navlistPanel(
-             "Logistic Regression",
-             tabPanel("When",
+             "",
+             tabPanel("Why Use Logistic Regression",
+                      h2("Logistic Regression"),
+                      p(logistic_box_office),
                       fluidRow(
                         column(6,
                           sliderInput("logistic_n", "Number of Observations:", 0, 500, 100)
@@ -136,27 +130,50 @@ ui <- tagList(
                           sliderInput("c1", "Coefficient (Predictive Power of Variable):", 0, 10, 3)
                         )
                       ),
-                      h2("Logistic Regression"),
                       plotOutput("logisticPlot"),
                       p("remember our raw data from before:"),
-                      plotOutput("logisticRaw"),
-                      p(logistic_when_3),
-                      p(assumptions)
+                      plotOutput("logisticRaw")
              ),
-             tabPanel("Why",
-                      h2("Tell me why!"),
-                      h3("ain't nothin' but a heartache"),
-                      p("Don't worry, the backstreet boys don't think regression is a mistake."),
-                      p(logistic_why_1),
-                      p(logistic_why_2)
+             tabPanel("When Is This Appropriate?",
+                      h2("Assumptions in Binary Logistic Regression"),
+                      p("Logistic Regression is not the fussiest the methods It is fine with many kinds of data that linear regressions are not."),
+                      p("What Binary Logistic Regression doesn’t require:"),
+                      tags$ul(
+                        tags$li("There does not need to be a linear relationship between the predictor and outcome variable."),
+                        tags$li("The residuals (error terms) do not need to be normally distributed."),
+                        tags$li("There is no assumption of homoscedasticity."),
+                        tags$li("Predictors can be  continuous or categorical.")
+                      ),
+                      p("What Binary Logistic Regression does require:"),
+                      tags$ul(
+                        tags$li("That the outcome variable is a binary categorical outcome."),
+                        tags$li("Observations should be independent of each other."),
+                        tags$li("Little to no multicollinearity among the predictor variables. "),
+                        tags$li("A linear relationship between the predictor variables and the log odds."),
+                        tags$li("A reasonable sample size especially when one outcome is a lot less likely than the other.")
+                      ),
+                      p("Fourth, logistic regression assumes linearity of independent variables and log odds.  although this analysis does not require the dependent and independent variables to be related linearly, it requires that the independent variables are linearly related to the log odds."),
+                      p("Finally, logistic regression typically requires a large sample size.  A general guideline is that you need at minimum of 10 cases with the least frequent outcome for each independent variable in your model. For example, if you have 5 independent variables and the expected probability of your least frequent outcome is .10, then you would need a minimum sample size of 500 (10*5 / .10).")
+             ),
+             tabPanel("Additional Uses",
+                      h2("Why Use This Technique?"),
+                      p(inf_pred_intro),
+                      p(inference),
+                      p(pred)
              ),
              tabPanel("How",
                       h3("How do I implement a Logistic Regression Model?"),
-                      p(how_to_use)
-             )
-             #widths=c(4, 6)   TODO fix this
+                      p(how_to_use),
+                      tags$ul(
+                        tags$li("Generating appropriate data for Logistic Regression"),
+                        tags$li("How to create a logistic regression model"),
+                        tags$li("Interpreting the output of such a model, and"),
+                        tags$li("Visualizing logistic regression")
+                      ),
+                      p("After you're finished take our quiz to help understand what you know and don't yet know about Logistic Regression Modles")
            )
          )
+       )
     ),
     tabPanel("R Code Tutorials",
              # and this is where the output actually ends up. I think leaving it 
@@ -165,7 +182,7 @@ ui <- tagList(
     ),
     tabPanel("Quiz",
            mainPanel(
-             "Hello I hear you'd like to learn some R",
+             "Quick Logistic Regression Quiz",
              R_quiz
            )
     )
