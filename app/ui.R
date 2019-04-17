@@ -99,7 +99,9 @@ ui <- tagList(
                       h2("Multiple Logistic Regression"),
                       p("Although in the previous examples we have used just one predictor variable,  we can use multiple predictors and they can be a mixture of continuous and categorical. The graph below shows the influence on the probability of winning that 3 different factors have. "),
                       HTML('<img src="adamsandler.png" height="400"</img>'),
-                      p("It should be noted that in this graph, we have normalized Budget, Score, and number of Adam Sandlers to fall between -3 and 3.")
+                      p("It should be noted that in this graph, we have normalized Budget, Score, and number of Adam Sandlers to fall between -3 and 3."),
+                      p("As you can see, each of these lines create a distinct probability curve. Logstic regression can, in fact, use multiple predictors for one
+                        binary outcome. You'll learn how to do this in the tutorial, but we won't visualize it here.")
              ),
              tabPanel("When Is This Appropriate?",
                       h2("Assumptions in Binary Logistic Regression"),

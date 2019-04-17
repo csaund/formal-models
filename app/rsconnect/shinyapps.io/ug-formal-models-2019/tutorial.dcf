@@ -5,9 +5,9 @@ account: ug-formal-models-2019
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 868483
-bundleId: 2015774
+bundleId: 2018410
 url: https://ug-formal-models-2019.shinyapps.io/tutorial/
-when: 1555421823.30096
+when: 1555507685.06951
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: data_generation.R|global.R|tutorial.html|tutorial.Rmd|carolyn-playing-around|images
+ignoredFiles: data_generation.R|global.R|tutorial.html|tutorial.Rmd|carolyn-playing-around

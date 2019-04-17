@@ -33,14 +33,39 @@ a linear combination of `x` and `correlation`, and then take the inverse logit f
 Remember those functions are as follows:
   z = 1 + correlation*x      # linear combination with a bias
   pr = 1/(1+exp(-z))         # pass through an inv-logit function
+  
+save you data in a variable called `dat`
 ```{r gen-data, exercise = TRUE} 
 generate_data <- function(n, corr) {
   df = ...
   return(df)
 }
+
+dat <- generate_data(...)
 ```
 
 ```{r gen-data-hint} 
+generate_data <- function(n, corr) {
+  # Generate normally distributed X
+  x = rnorm(n)           # a continuous variable
+  # Since we're simulating our data we get to decide what we find. 
+  # We're going to decide how much these variable increase or decease the odds of our outcome. There will be roughly approxomite to the coefficent estimate we get out of our model (although not exact since we're radomly sampling from a normal distribution).
+  correlation=corr
+  
+  z = 1 + correlation*x      # linear combination with a bias
+  pr = 1/(1+exp(-z))         # pass through an inv-logit function
+  y = rbinom(n,1,pr)         # bernoulli response variable
+  df = data.frame(y=y,x=x)   #pop them all into a data frame
+}
+
+dat <- generate_data(100, 10)
+dat
+```
+
+
+Now that we have our data, running a linear model is easy. Use the `glm()` function to
+create a logistic regression model of `y` from `x`.
+```{r glm, exercise = TRUE}
 generate_data <- function(n, corr) {
   # Generate normally distributed X
   x = rnorm(n)           # some continuous variables 
@@ -53,23 +78,35 @@ generate_data <- function(n, corr) {
   y = rbinom(n,1,pr)         # bernoulli response variable
   df = data.frame(y=y,x=x)   #pop them all into a data frame
 }
-```
 
+dat <- generate_data(100, 10)
 
-Now that we have our data, running a linear model is easy. Use the `glm()` function to
-create a logistic regression model of `y` from `x`.
-```{r glm, exercise = TRUE}
 model <- glm(...)
 ```
 
 ```{r glm-hint}
 # if you need a hint, type ?glm in the console
-model <- glm(..., family="binomial")
+model <- glm(y ~ x, family="binomial", data=dat)
 ```
 
 
 You can easily view the output of the model using the `summary()` function. Try it below:
 ```{r view-summary, exercise=TRUE}
+generate_data <- function(n, corr) {
+  # Generate normally distributed X
+  x = rnorm(n)           # some continuous variables 
+  # Since we're simulating our data we get to decide what we find. 
+  # We're going to decide how much these variable increase or decease the odds of our outcome. There will be roughly approxomite to the coefficent estimate we get out of our model (although not exact since we're radomly sampling from a normal distribution).
+  correlation=corr
+  
+  z = 1 + correlation*x      # linear combination with a bias
+  pr = 1/(1+exp(-z))         # pass through an inv-logit function
+  y = rbinom(n,1,pr)         # bernoulli response variable
+  df = data.frame(y=y,x=x)   #pop them all into a data frame
+}
+
+data <- generate_data(100, 10)
+model <- glm(y ~ x, family="binomial", data=dat)
 summary(...)
 ```
 
@@ -185,6 +222,144 @@ knitr::include_graphics(path = extra_path)
 
 
 If we were to use our model to predict ice behaviour for some hypothetical temperatures, we would see that: In the instance of a temperature way over zero, the corresponding point on our regression line suggests that there is a probability very close to 1 that the ice will break. With a temperature just above zero the probability is lower but still pretty close to 1. And with a temperature below zero the probability is very close to 0 and the ice is unlikely to break. 
+
+## Playing With Inputs (With Code)
+
+As we learned, interpeting the coefficients can be a little tricky because they are given in log odds units. If we are only interested in looking at one of our we can simply convert the coefficent to plain odds with the exp function.
+
+In order to make this a quickly as possible we're going to use the `broom::tidy` function to gather togethor the useful information from our model into a data frame.
+
+Use this code chunk to `print` what `broom::tidy` can do. Use the code from the previous section to create `fit` in the same way you created `model`. We've given you the code to generate data with multiple predictors this time. 
+```{r broom, exercise=TRUE}
+generate_data <- function(n, c1, c2, c3) {
+  # Generate normally distributed X
+  x1 = rnorm(n)           # continuous variables
+  x2 = rnorm(n)           
+  x3 = rnorm(n)           
+  # Since we're simulating our data we get to decide what we find. 
+  # We're going to decide how much these variable increase or decease the odds of our outcome. There will be roughly approxomite to the coefficent estimate we get out of our model (although not exact since we're radomly sampling from a normal distribution).
+  
+  z = 1 + c1*x1 + c2*x2 +c3*x3       # linear combination with a bias
+  pr = 1/(1+exp(-z))         # pass through an inv-logit function
+  y = rbinom(n,1,pr)      # bernoulli response variable
+  df = data.frame(y=y,x1=x1,x2=x2,x3=x3) #pop them all into a data frame
+}
+
+dat <- generate_data(100, 10, 5, 3)
+
+fit <- glm(...)
+
+fit.stats <- broom::tidy(fit)
+
+```
+
+```{r broom-hint}
+fit <-glm(y ~ x1+x2+x3,
+ # we include our outcome variabes and all the predictor variables :
+ data = dat,
+ # we specify what data we're using:
+ family = "binomial")
+
+fit.stats <- broom::tidy(fit)
+
+print(fit.stats)
+```
+
+We can see the shape of our stats. 
+
+Now say we want to find out what predictive power `x2` has. We need to use the `exp()` function to convert the log odds to plain odds. Remember to copy and paste your code from above to recreate `fit`.
+```{r exp-plain, exercise=TRUE}
+plain_odds <- exp(fit.stats$estimate[3])
+plain_odds
+```
+
+In this case every unit increase in `x2` makes it `plain_odds` times more likely to be whichever outcome was coded as 1.
+
+Alternativley you might want to predict the probability of an outcome knowing the specific values of the predictor variables you're interested in. 
+
+Use the code below to decide what values you want to plug in, and then generate the data using these new coefficient values
+```{r plug-in, exercise=TRUE}
+A = 
+B = 
+C = 
+```
+
+```{r plug-in-hint}
+# You can choose any value you like here. For example:
+A = 0.4
+B = 0.1
+C = 0.3
+
+# Remember, you are going to use these values in your generate_data() function. 
+# But really you're just passing these values as coefficients to that function
+# From before. 
+```
+
+since probability can be caluculated from log odds using the inverse logit function P=exp(logit)/1+exp(logit) we can calculate the probability of oour outcome like this. Remember to copy and paste your code from above to generate `fit` with your new coefficient values.
+```{r log-odds, exercise=TRUE}
+## You do not need to edit this code chunk
+logit <- fit.stats$estimate[1] +
+  # our intercept:
+ fit.stats$estimate[2]*A + 
+  #:our chosen value of x1
+ fit.stats$estimate[3]*B +
+  #:our chosen value of x2
+  fit.stats$estimate[4]*C
+  #:our chosen value of x3
+```
+
+```{r log-ods-hint}
+# Remember to plug in your values of A, B, and C from above!
+```
+
+Now calculate the numerator and denominator for probability. Remember the numerator is the `exp` of our total log odds and the total probability must sum to 1.
+```{r num-dem, exercise=TRUE}
+numerator <- 
+denominator <- 
+P <- numerator / denominator
+P
+```
+
+```{r num-dem-hint}
+#our numerator is the exp of our total log odds
+numerator <- exp(logit)
+# our denominator is the exp of 1= our total log odds 
+denominator <- 1 + exp(logit)
+P <- numerator/denominator
+P
+```
+With our chosen values for the independant variables `P` is the probability of our outcome!
+
+## Plotting 
+
+You can also embed plots. Let's use our model from the previous section now. Copy and paste that code in this code chunk to create this glm. 
+```{r plot-one, exercise=TRUE}
+# Copy and paste the data generating code here
+
+# You do not need to edit this code
+g <- glm( y~x1,family="binomial")
+data = data.frame(y=y, x1=x1)
+prob <- data.frame(predict(g, type = "response"))
+names(prob) <- c("prob")
+mydf <- dplyr::bind_cols(data, prob) 
+
+mydf$y <- as.character(mydf$y)
+```
+
+We can use `ggplot` to make a beautiful plot from this. Try editing the code below to create a plot of our regression. Hint: use `geom_point` or `geom_line`
+```{r ggplot, exercise=TRUE}
+ggplot(mydf, aes(x=x1, y=prob, color = y))
+
+```
+
+```{r ggplot-hint}
+ggplot(mydf, aes(x=x1, y=prob, color = y))
+  + geom_point()
+
+# or
+ggplot(mydf, aes(x=x1, y=prob, color = y))
+  + geom_line()
+```
 
 ## Linear Regression: Refresher
 
