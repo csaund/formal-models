@@ -19,7 +19,7 @@ R_quiz <- quiz(
   ),
   question("The inital output coefficents from a logistic regression represent ",
            answer("probability"),
-           answer("logg odds", correct = TRUE),
+           answer("log odds", correct = TRUE),
            answer("odds ratio")
   ),
   question("In a logistic regression the outcome variable can be ",

@@ -5,8 +5,8 @@ account: ug-formal-models-2019
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 868489
-bundleId: 2018403
+bundleId: 2018532
 url: https://ug-formal-models-2019.shinyapps.io/logistic-regression-code-tutorial/
-when: 1555507509.2528
+when: 1555510845.80771
 asMultiple: FALSE
 asStatic: FALSE

@@ -245,7 +245,7 @@ generate_data <- function(n, c1, c2, c3) {
   df = data.frame(y=y,x1=x1,x2=x2,x3=x3) #pop them all into a data frame
 }
 
-dat <- generate_data(100, 10, 5, 3)
+dat <- generate_data(100, 0.3, 1.5, 2)
 
 fit <- glm(...)
 
@@ -277,26 +277,12 @@ In this case every unit increase in `x2` makes it `plain_odds` times more likely
 
 Alternativley you might want to predict the probability of an outcome knowing the specific values of the predictor variables you're interested in. 
 
-Use the code below to decide what values you want to plug in, and then generate the data using these new coefficient values
-```{r plug-in, exercise=TRUE}
+since probability can be caluculated from log odds using the inverse logit function P=exp(logit)/1+exp(logit) we can calculate the probability of oour outcome like this. Remember to copy and paste your code from above to generate `fit` with your new coefficient values.
+```{r log-odds, exercise=TRUE}
 A = 
 B = 
 C = 
-```
 
-```{r plug-in-hint}
-# You can choose any value you like here. For example:
-A = 0.4
-B = 0.1
-C = 0.3
-
-# Remember, you are going to use these values in your generate_data() function. 
-# But really you're just passing these values as coefficients to that function
-# From before. 
-```
-
-since probability can be caluculated from log odds using the inverse logit function P=exp(logit)/1+exp(logit) we can calculate the probability of oour outcome like this. Remember to copy and paste your code from above to generate `fit` with your new coefficient values.
-```{r log-odds, exercise=TRUE}
 ## You do not need to edit this code chunk
 logit <- fit.stats$estimate[1] +
   # our intercept:
@@ -309,7 +295,10 @@ logit <- fit.stats$estimate[1] +
 ```
 
 ```{r log-ods-hint}
-# Remember to plug in your values of A, B, and C from above!
+# You can choose any value you like here. For example:
+A = 0.4
+B = 0.1
+C = 0.3
 ```
 
 Now calculate the numerator and denominator for probability. Remember the numerator is the `exp` of our total log odds and the total probability must sum to 1.
